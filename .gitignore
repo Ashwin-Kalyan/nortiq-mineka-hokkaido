@@ -45,6 +45,3 @@ wheels/
 .DS_Store
 Thumbs.db
 
-# Info folder (contains product images)
-info/
-
