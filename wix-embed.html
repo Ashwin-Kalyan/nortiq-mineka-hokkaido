@@ -655,9 +655,209 @@ body {
 }
 
 .category-card:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translate3d(0, -8px, 0) scale(1.02);
     box-shadow: var(--shadow-lg);
     border-color: rgba(255, 107, 107, 0.3);
+}
+
+/* Product Gallery */
+.product-gallery {
+    margin-top: 40px;
+}
+
+.product-grid {
+    margin-top: 30px;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.product-grid.language-switching {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+}
+
+.product-grid.language-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    transform: translateZ(0);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translate3d(0, -6px, 0);
+    box-shadow: var(--shadow-md);
+}
+
+.product-image-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease-out;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.product-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+    .product-info {
+        padding: 16px;
+    }
+    
+    .product-name {
+        font-size: 16px;
+    }
+    
+    .product-description {
+        font-size: 13px;
+    }
+    
+    .product-image {
+        max-height: 300px;
+    }
+}
+
+/* Booking Form */
+.booking-form {
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--gradient-red);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    transform: translateZ(0);
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translate3d(0, -2px, 0);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-submit:active:not(:disabled) {
+    transform: translate3d(0, 0, 0);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.form-message {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+}
+
+.form-message.success {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    display: block;
+}
+
+.form-message.error {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    display: block;
 }
 
 .category-title {
@@ -1092,6 +1292,32 @@ html {
                     <p class="pricing-note">料金は行程・時間・季節により異なります。 詳しくはお問い合わせください。</p>
                 </div>
 
+                <!-- Booking Form -->
+                <div class="booking-form">
+                    <h3 class="section-title" style="font-size: 24px; margin-bottom: 20px;" data-ja="ご予約フォーム" data-en="Booking Form" data-zh="预订表单">ご予約フォーム</h3>
+                    
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label class="form-label" data-ja="お名前" data-en="Name" data-zh="姓名">お名前</label>
+                            <input type="text" class="form-control" id="bookingName" name="name" required placeholder="お名前を入力してください">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-ja="電話番号" data-en="Phone Number" data-zh="电话号码">電話番号</label>
+                            <input type="tel" class="form-control" id="bookingPhone" name="phone" required placeholder="電話番号を入力してください">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-ja="お迎え時間" data-en="Pickup Time" data-zh="接送时间">お迎え時間</label>
+                            <input type="datetime-local" class="form-control" id="bookingTime" name="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-ja="お迎え場所" data-en="Pickup Location" data-zh="接送地点">お迎え場所</label>
+                            <input type="text" class="form-control" id="bookingLocation" name="location" required placeholder="お迎え場所を入力してください">
+                        </div>
+                        <button type="submit" class="btn-submit" id="submitBtn" data-ja="予約を送信" data-en="Submit Booking" data-zh="提交预订">予約を送信</button>
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </div>
+
                 <div class="content-block" data-lang="en" style="display: none;">
                     <p class="intro-text">We offer comfortable and safe private hire car services with professional drivers. Suitable for airport transfers, sightseeing tours, business travel, golf trips, and ski resorts.</p>
                     <ul class="feature-list">
@@ -1103,6 +1329,32 @@ html {
                     <p class="pricing-note">Prices vary depending on destination and duration.<br>Please contact us for a quote.</p>
                 </div>
 
+                <!-- Booking Form (English) -->
+                <div class="booking-form" data-lang="en" style="display: none;">
+                    <h3 class="section-title" style="font-size: 24px; margin-bottom: 20px;">Booking Form</h3>
+                    
+                    <form id="bookingFormEn">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" id="bookingNameEn" name="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="bookingPhoneEn" name="phone" required placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pickup Time</label>
+                            <input type="datetime-local" class="form-control" id="bookingTimeEn" name="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pickup Location</label>
+                            <input type="text" class="form-control" id="bookingLocationEn" name="location" required placeholder="Enter pickup location">
+                        </div>
+                        <button type="submit" class="btn-submit" id="submitBtnEn">Submit Booking</button>
+                        <div class="form-message" id="formMessageEn"></div>
+                    </form>
+                </div>
+
                 <div class="content-block" data-lang="zh" style="display: none;">
                     <p class="intro-text">提供丰田 Alphard / HiAce 豪华包车服务，包括机场接送、观光行程、商务出行、滑雪、高尔夫等各种需求。</p>
                     <ul class="feature-list">
@@ -1112,6 +1364,32 @@ html {
                         <li>·早晚时间可提前预订</li>
                     </ul>
                     <p class="pricing-note">费用会根据行程与时长有所不同，欢迎咨询报价。</p>
+                </div>
+
+                <!-- Booking Form (Chinese) -->
+                <div class="booking-form" data-lang="zh" style="display: none;">
+                    <h3 class="section-title" style="font-size: 24px; margin-bottom: 20px;">预订表单</h3>
+                    
+                    <form id="bookingFormZh">
+                        <div class="form-group">
+                            <label class="form-label">姓名</label>
+                            <input type="text" class="form-control" id="bookingNameZh" name="name" required placeholder="请输入您的姓名">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">电话号码</label>
+                            <input type="tel" class="form-control" id="bookingPhoneZh" name="phone" required placeholder="请输入您的电话号码">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">接送时间</label>
+                            <input type="datetime-local" class="form-control" id="bookingTimeZh" name="time" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">接送地点</label>
+                            <input type="text" class="form-control" id="bookingLocationZh" name="location" required placeholder="请输入接送地点">
+                        </div>
+                        <button type="submit" class="btn-submit" id="submitBtnZh">提交预订</button>
+                        <div class="form-message" id="formMessageZh"></div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -1329,6 +1607,422 @@ html {
                         <div class="category-card">
                             <h3 class="category-title" data-ja="アクセサリー" data-en="Accessories" data-zh="配饰">アクセサリー</h3>
                             <p class="category-desc" data-ja="帽子・手袋・マフラー・靴下など" data-en="Hats, gloves, scarves, socks" data-zh="帽子、手套、围巾、袜子等">帽子・手袋・マフラー・靴下など</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <h3 class="section-title" style="font-size: 24px; margin-bottom: 20px;" data-ja="商品ギャラリー" data-en="Product Gallery" data-zh="商品图库">商品ギャラリー</h3>
+                    
+                    <div class="product-grid row g-4" data-lang="ja">
+                        <!-- Suits -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010415/XF-0010415-Image 01.png.JPG" alt="XF-0010415" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010415</h4>
+                                    <p class="product-description">高品質なキッズスーツ。フォーマルな場面にも対応できる上質な仕上がり。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010416/XF-0010416-Image 01.png.JPG" alt="XF-0010416" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010416</h4>
+                                    <p class="product-description">クラシックなデザインのキッズスーツ。特別な日のために。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010417/XF-0010417-Image 01.png.JPG" alt="XF-0010417" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010417</h4>
+                                    <p class="product-description">エレガントなキッズスーツ。様々なシーンで活躍します。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010418/XF-0010418-Image 01.png.JPG" alt="XF-0010418" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010418</h4>
+                                    <p class="product-description">モダンなデザインのキッズスーツ。快適な着心地。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dresses -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-001/MK-001-Image 01.png.JPG" alt="MK-001" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-001</h4>
+                                    <p class="product-description">可愛らしいキッズドレス。パーティーや特別な日に最適。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-002/MK-002-Image 01.png.JPG" alt="MK-002" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-002</h4>
+                                    <p class="product-description">エレガントなキッズドレス。上質な素材を使用。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-003/MK-003-Image 01.png.JPG" alt="MK-003" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-003</h4>
+                                    <p class="product-description">クラシックなデザインのキッズドレス。特別な日のために。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-004/MK-004-Image 01.png.JPG" alt="MK-004" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-004</h4>
+                                    <p class="product-description">モダンなキッズドレス。日常使いにも最適。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-005/MK-005-Image 01.png.JPG" alt="MK-005" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-005</h4>
+                                    <p class="product-description">可愛らしいデザインのキッズドレス。様々なシーンで活躍。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-007/MK-007-Image 01.png.JPG" alt="MK-007" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-007</h4>
+                                    <p class="product-description">エレガントなキッズドレス。特別な日のために。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-008/MK-008-Image 01.png.JPG" alt="MK-008" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-008</h4>
+                                    <p class="product-description">クラシックなデザインのキッズドレス。上質な仕上がり。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-010/MK-010-Image 01.png.JPG" alt="MK-010" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-010</h4>
+                                    <p class="product-description">モダンで可愛らしいキッズドレス。快適な着心地。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-grid row g-4" data-lang="en" style="display: none;">
+                        <!-- Suits -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010415/XF-0010415-Image 01.png.JPG" alt="XF-0010415" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010415</h4>
+                                    <p class="product-description">High-quality kids suit. Perfect for formal occasions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010416/XF-0010416-Image 01.png.JPG" alt="XF-0010416" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010416</h4>
+                                    <p class="product-description">Classic design kids suit. For special occasions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010417/XF-0010417-Image 01.png.JPG" alt="XF-0010417" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010417</h4>
+                                    <p class="product-description">Elegant kids suit. Versatile for various occasions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010418/XF-0010418-Image 01.png.JPG" alt="XF-0010418" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010418</h4>
+                                    <p class="product-description">Modern design kids suit. Comfortable fit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dresses -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-001/MK-001-Image 01.png.JPG" alt="MK-001" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-001</h4>
+                                    <p class="product-description">Adorable kids dress. Perfect for parties and special occasions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-002/MK-002-Image 01.png.JPG" alt="MK-002" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-002</h4>
+                                    <p class="product-description">Elegant kids dress. Made with premium materials.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-003/MK-003-Image 01.png.JPG" alt="MK-003" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-003</h4>
+                                    <p class="product-description">Classic design kids dress. For special days.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-004/MK-004-Image 01.png.JPG" alt="MK-004" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-004</h4>
+                                    <p class="product-description">Modern kids dress. Great for everyday wear.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-005/MK-005-Image 01.png.JPG" alt="MK-005" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-005</h4>
+                                    <p class="product-description">Cute design kids dress. Versatile for various occasions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-007/MK-007-Image 01.png.JPG" alt="MK-007" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-007</h4>
+                                    <p class="product-description">Elegant kids dress. For special occasions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-008/MK-008-Image 01.png.JPG" alt="MK-008" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-008</h4>
+                                    <p class="product-description">Classic design kids dress. Premium quality finish.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-010/MK-010-Image 01.png.JPG" alt="MK-010" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-010</h4>
+                                    <p class="product-description">Modern and cute kids dress. Comfortable fit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-grid row g-4" data-lang="zh" style="display: none;">
+                        <!-- Suits -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010415/XF-0010415-Image 01.png.JPG" alt="XF-0010415" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010415</h4>
+                                    <p class="product-description">高品质儿童西装。适合正式场合的精美制作。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010416/XF-0010416-Image 01.png.JPG" alt="XF-0010416" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010416</h4>
+                                    <p class="product-description">经典设计儿童西装。适合特殊场合。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010417/XF-0010417-Image 01.png.JPG" alt="XF-0010417" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010417</h4>
+                                    <p class="product-description">优雅儿童西装。适合各种场合。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/スーツ/xf010418/XF-0010418-Image 01.png.JPG" alt="XF-0010418" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">XF-0010418</h4>
+                                    <p class="product-description">现代设计儿童西装。舒适穿着感。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dresses -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-001/MK-001-Image 01.png.JPG" alt="MK-001" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-001</h4>
+                                    <p class="product-description">可爱儿童连衣裙。适合聚会和特殊场合。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-002/MK-002-Image 01.png.JPG" alt="MK-002" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-002</h4>
+                                    <p class="product-description">优雅儿童连衣裙。采用优质材料制作。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-003/MK-003-Image 01.png.JPG" alt="MK-003" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-003</h4>
+                                    <p class="product-description">经典设计儿童连衣裙。适合特殊日子。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-004/MK-004-Image 01.png.JPG" alt="MK-004" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-004</h4>
+                                    <p class="product-description">现代儿童连衣裙。日常穿着也很适合。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-005/MK-005-Image 01.png.JPG" alt="MK-005" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-005</h4>
+                                    <p class="product-description">可爱设计儿童连衣裙。适合各种场合。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-007/MK-007-Image 01.png.JPG" alt="MK-007" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-007</h4>
+                                    <p class="product-description">优雅儿童连衣裙。适合特殊场合。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-008/MK-008-Image 01.png.JPG" alt="MK-008" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-008</h4>
+                                    <p class="product-description">经典设计儿童连衣裙。优质工艺。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image-wrapper">
+                                    <img src="info/Mineka Web制作用_商品信息一覧/ドレス/MK-010/MK-010-Image 01.png.JPG" alt="MK-010" class="product-image">
+                                </div>
+                                <div class="product-info">
+                                    <h4 class="product-name">MK-010</h4>
+                                    <p class="product-description">现代可爱儿童连衣裙。舒适穿着感。</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1628,7 +2322,7 @@ function switchLanguage(lang) {
     currentLang = lang;
     
     // Add switching class to all content blocks for fade out
-    const contentBlocks = document.querySelectorAll('.content-block, .tour-courses, .faq-list');
+    const contentBlocks = document.querySelectorAll('.content-block, .tour-courses, .faq-list, .product-grid');
     contentBlocks.forEach(block => {
         block.classList.add('language-switching');
     });
@@ -1663,8 +2357,8 @@ function switchLanguage(lang) {
                 // For Bootstrap grid rows, use d-flex
                 if (block.classList.contains('row')) {
                     block.classList.remove('d-none');
-                    block.classList.add('d-flex', 'language-active');
                     block.style.display = 'flex';
+                    block.classList.add('language-active');
                 } else {
                     block.style.display = 'block';
                     block.classList.remove('d-none');
@@ -1674,12 +2368,22 @@ function switchLanguage(lang) {
                 block.classList.remove('language-active', 'language-switching');
                 if (block.classList.contains('row')) {
                     block.classList.add('d-none');
-                    block.classList.remove('d-flex');
                     block.style.display = 'none';
                 } else {
                     block.style.display = 'none';
                     block.classList.add('d-none');
                 }
+            }
+        });
+        
+        // Show/hide booking forms based on language
+        const bookingForms = document.querySelectorAll('.booking-form');
+        bookingForms.forEach(form => {
+            const formLang = form.getAttribute('data-lang');
+            if (formLang === lang || (!formLang && lang === 'ja')) {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
             }
         });
         
@@ -1818,6 +2522,105 @@ window.addEventListener('load', () => {
         document.body.style.transition = 'opacity 0.5s ease-in-out';
         document.body.style.opacity = '1';
     }, 100);
+});
+
+// Booking Form Handler
+function initializeBookingForms() {
+    const forms = ['bookingForm', 'bookingFormEn', 'bookingFormZh'];
+    const formIds = {
+        'bookingForm': { name: 'bookingName', phone: 'bookingPhone', time: 'bookingTime', location: 'bookingLocation', message: 'formMessage', btn: 'submitBtn' },
+        'bookingFormEn': { name: 'bookingNameEn', phone: 'bookingPhoneEn', time: 'bookingTimeEn', location: 'bookingLocationEn', message: 'formMessageEn', btn: 'submitBtnEn' },
+        'bookingFormZh': { name: 'bookingNameZh', phone: 'bookingPhoneZh', time: 'bookingTimeZh', location: 'bookingLocationZh', message: 'formMessageZh', btn: 'submitBtnZh' }
+    };
+    
+    forms.forEach(formId => {
+        const form = document.getElementById(formId);
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const ids = formIds[formId];
+                const submitBtn = document.getElementById(ids.btn);
+                const messageDiv = document.getElementById(ids.message);
+                
+                const bookingData = {
+                    name: document.getElementById(ids.name).value,
+                    phone: document.getElementById(ids.phone).value,
+                    time: document.getElementById(ids.time).value,
+                    location: document.getElementById(ids.location).value
+                };
+                
+                // Disable submit button
+                submitBtn.disabled = true;
+                submitBtn.textContent = currentLang === 'ja' ? '送信中...' : currentLang === 'zh' ? '提交中...' : 'Submitting...';
+                
+                try {
+                    const response = await fetch('http://localhost:3000/api/booking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(bookingData)
+                    });
+                    
+                    // Check if response is ok before trying to parse JSON
+                    let result;
+                    try {
+                        result = await response.json();
+                    } catch (jsonError) {
+                        // If JSON parsing fails, the server might have returned an error
+                        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                    }
+                    
+                    if (response.ok) {
+                        messageDiv.className = 'form-message success';
+                        messageDiv.textContent = currentLang === 'ja' ? '予約が正常に送信されました。24時間以内にご連絡いたします。' : 
+                                                 currentLang === 'zh' ? '预订已成功提交。我们将在24小时内联系您。' : 
+                                                 'Booking submitted successfully. We will contact you within 24 hours.';
+                        form.reset();
+                    } else {
+                        // Show the actual error message from the server
+                        const errorMsg = result.error || result.message || 'Submission failed';
+                        throw new Error(errorMsg);
+                    }
+                } catch (error) {
+                    messageDiv.className = 'form-message error';
+                    
+                    // Provide more specific error messages
+                    let errorText;
+                    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.message.includes('ERR_CONNECTION_REFUSED')) {
+                        errorText = currentLang === 'ja' ? 
+                            'サーバーに接続できません。バックエンドサーバーが起動しているか確認してください。' : 
+                            currentLang === 'zh' ? 
+                            '无法连接到服务器。请确保后端服务器正在运行。' : 
+                            'Cannot connect to server. Please make sure the backend server is running (python app.py)';
+                    } else if (error.message.includes('Missing required field')) {
+                        errorText = currentLang === 'ja' ? 
+                            '必須項目が入力されていません。すべての項目を入力してください。' : 
+                            currentLang === 'zh' ? 
+                            '缺少必填字段。请填写所有字段。' : 
+                            'Missing required fields. Please fill in all fields.';
+                    } else {
+                        errorText = currentLang === 'ja' ? 
+                            `エラー: ${error.message}` : 
+                            currentLang === 'zh' ? 
+                            `错误: ${error.message}` : 
+                            `Error: ${error.message}`;
+                    }
+                    
+                    messageDiv.textContent = errorText;
+                    console.error('Booking submission error:', error);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentLang === 'ja' ? '予約を送信' : currentLang === 'zh' ? '提交预订' : 'Submit Booking';
+                }
+            });
+        }
+    });
+}
+
+// Initialize booking forms on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initializeBookingForms();
 });
     </script>
 </body>
