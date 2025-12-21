@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mineka Hokkaido - ハイヤー・貸切サービス</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gradient-red: #ff6b6b;
+    --gradient-white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-primary: #1a1a1a;
+    --text-secondary: #666;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --border-radius: 16px;
+    --border-radius-lg: 24px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+/* Override Bootstrap defaults */
+.navbar-brand {
+    margin-right: 0;
+    padding: 0;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        flex-grow: 1;
+    }
+}
+
+/* Frosted Glass Menubar */
+.menubar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 60px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menubar .navbar-toggler {
+    border: none;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menubar .navbar-toggler:hover {
+    background: rgba(255, 107, 107, 0.1);
+    transform: scale(1.05);
+}
+
+.menubar .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25);
+}
+
+.menubar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.menubar-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.menubar .navbar-nav {
+    align-items: center;
+}
+
+.menubar .nav-link {
+    padding: 6px 10px !important;
+    margin: 0 2px;
+    font-size: 13px;
+    background: transparent !important;
+    border: none !important;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+.menu-items {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+@media (max-width: 991px) {
+    .menu-items {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        overflow: visible;
+    }
+    
+    .menubar .nav-link {
+        padding: 8px 12px !important;
+        margin: 4px 0;
+    }
+    
+    .language-switcher {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.menu-item {
+    padding: 6px 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 12px;
+    z-index: -1;
+}
+
+.menu-item:hover::before {
+    opacity: 1;
+}
+
+.menu-item:hover {
+    transform: translateY(-2px);
+    color: var(--gradient-red);
+}
+
+.menu-item.active {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.25), rgba(255, 107, 107, 0.15));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #dc3545;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
+    font-weight: 600;
+}
+
+.menu-item.active::before {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.3), rgba(255, 107, 107, 0.2));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 1;
+}
+
+.language-switcher {
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 4px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.lang-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 107, 107, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.lang-btn:hover::before {
+    width: 100px;
+    height: 100px;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 107, 107, 0.1);
+    transform: scale(1.08) translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+
+.lang-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.lang-btn.active {
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+    animation: langButtonActivate 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes langButtonActivate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 15px;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px 15px;
+    }
+}
+
+.content-section {
+    display: none;
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 255, 255, 0.3));
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 40px;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Section Content */
+.section-content {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: var(--border-radius-lg);
+    padding: 50px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 30px;
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+.content-block {
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content-block.language-switching {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.content-block.language-active {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-item {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.menu-item.language-switching {
+    opacity: 0.5;
+    transform: translateX(-5px);
+}
+
+.menu-item.language-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.intro-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+
+.feature-list,
+.area-list,
+.contact-list {
+    list-style: none;
+    margin: 24px 0;
+}
+
+.feature-list li,
+.area-list li,
+.contact-list li {
+    padding: 12px 0;
+    padding-left: 24px;
+    position: relative;
+    font-size: 16px;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.feature-list li::before,
+.area-list li::before,
+.contact-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--gradient-red);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.feature-list li:hover,
+.area-list li:hover,
+.contact-list li:hover {
+    transform: translateX(8px);
+    color: var(--gradient-red);
+}
+
+.pricing-note {
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 135, 135, 0.1));
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--gradient-red);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.mission-text {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text-primary);
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.05), rgba(255, 135, 135, 0.05));
+    border-radius: var(--border-radius);
+}
+
+/* Tour Cards */
+.tour-courses {
+    margin-top: 30px;
+}
+
+.tour-courses.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0;
+    margin-right: 0;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tour-courses.row.d-none {
+    display: none !important;
+}
+
+.tour-courses.row.language-switching {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.tour-courses.row.language-active {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-list {
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-list.language-switching {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.faq-list.language-active {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tour-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tour-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.tour-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.tour-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.tour-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.tour-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+.tour-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tour-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+.tour-list {
+    list-style: none;
+    margin: 16px 0;
+}
+
+.tour-list li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 15px;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.tour-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gradient-red);
+    font-weight: bold;
+}
+
+.tour-list li:hover {
+    transform: translateX(6px);
+    color: var(--gradient-red);
+}
+
+.tour-duration {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 107, 107, 0.2);
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Clothing Shop Categories */
+.clothing-categories {
+    margin-top: 30px;
+}
+
+.category-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+}
+
+.category-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.category-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.category-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.category-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+.category-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.category-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.home-advantages {
+    margin-top: 20px;
+}
+
+.advantage-grid {
+    margin-top: 10px;
+}
+
+.advantage-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+}
+
+.advantage-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+.advantage-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.advantage-text {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* FAQ */
+.faq-list {
+    margin-top: 30px;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.faq-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.faq-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.faq-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.faq-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.faq-item:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+.faq-question {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.faq-answer {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+}
+
+.footer-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menubar-content {
+        padding: 0 15px;
+    }
+
+    .menu-item {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .section-content {
+        padding: 30px 20px;
+    }
+
+    .hero {
+        padding: 50px 20px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    body {
+        padding-top: 80px;
+    }
+    
+    .footer {
+        height: 60px;
+    }
+    
+    .footer-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+    }
+    
+    .intro-text {
+        font-size: 16px;
+    }
+    
+    .tour-card {
+        margin-bottom: 16px;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+    background: rgba(255, 107, 107, 0.3);
+    color: var(--text-primary);
+}
+    </style>
+</head>
+<body>
+    <!-- Frosted Glass Menubar -->
+    <nav class="menubar navbar navbar-expand-lg" id="menubar">
+        <div class="container-fluid menubar-content">
+            <a class="navbar-brand logo" href="#">Mineka Hokkaido</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto menu-items">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link menu-item active" data-section="home">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#hire" class="nav-link menu-item" data-section="hire">ハイヤー・貸切</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#tours" class="nav-link menu-item" data-section="tours">観光モデルコース</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#clothing" class="nav-link menu-item" data-section="clothing">キッズウェア</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link menu-item" data-section="about">会社紹介</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#faq" class="nav-link menu-item" data-section="faq">よくある質問</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#areas" class="nav-link menu-item" data-section="areas">送迎可能エリア</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link menu-item" data-section="contact">お問い合わせ</a>
+                    </li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="ja">日本語</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="zh">中文</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content container">
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div class="hero">
+                <h1 class="hero-title" data-ja="Mineka Hokkaido" data-en="Mineka Hokkaido" data-zh="Mineka Hokkaido">Mineka Hokkaido</h1>
+                <p class="hero-subtitle" data-ja="快適で安全な移動体験をお届けします" data-en="Delivering comfortable and safe travel experiences" data-zh="为您提供舒适安全的出行体验">快適で安全な移動体験をお届けします</p>
+            </div>
+
+            <div class="section-content home-advantages">
+                <h2 class="section-title" data-ja="Mineka の強み" data-en="The Mineka Advantage" data-zh="Mineka 的优势">Mineka の強み</h2>
+
+                <div class="content-block" data-lang="ja">
+                    <div class="advantage-grid row g-4">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">手頃な価格</h3>
+                                <p class="advantage-text">行程に合わせた柔軟な見積りで、ムダのない料金設定。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">柔軟なカスタマイズ</h3>
+                                <p class="advantage-text">観光・ビジネス・空港送迎まで、ご要望に合わせて調整可能。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">安全第一</h3>
+                                <p class="advantage-text">プロドライバーが担当し、チャイルドシートも無料でご用意。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">マルチリンガル対応</h3>
+                                <p class="advantage-text">日本語・英語・中国語でのサポートが可能。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">北海道に強い</h3>
+                                <p class="advantage-text">札幌・小樽・富良野・ニセコなど、主要エリアを熟知。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">迅速な見積り</h3>
+                                <p class="advantage-text">24時間以内に返信し、スムーズにご案内。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block" data-lang="en" style="display: none;">
+                    <div class="advantage-grid row g-4">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">Affordability</h3>
+                                <p class="advantage-text">Custom quotes matched to your itinerary to avoid wasted cost.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">Flexibility</h3>
+                                <p class="advantage-text">Airport, sightseeing, business—routes adjusted to your needs.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">Safety First</h3>
+                                <p class="advantage-text">Professional drivers; free child seats available on request.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">Multilingual Support</h3>
+                                <p class="advantage-text">Service in English, Chinese, and Japanese.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">Local Expertise</h3>
+                                <p class="advantage-text">Deep knowledge of Sapporo, Otaru, Furano, Niseko, and more.</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">Fast Quotes</h3>
+                                <p class="advantage-text">Responses within 24 hours to keep plans moving.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block" data-lang="zh" style="display: none;">
+                    <div class="advantage-grid row g-4">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">价格实惠</h3>
+                                <p class="advantage-text">根据行程灵活报价，避免不必要的费用。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">灵活行程</h3>
+                                <p class="advantage-text">机场接送、观光、商务等需求均可调整。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">安全优先</h3>
+                                <p class="advantage-text">专业司机负责驾驶，免费提供儿童安全座椅。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">多语言支持</h3>
+                                <p class="advantage-text">支持中文、日语、英语服务。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">北海道专业</h3>
+                                <p class="advantage-text">熟悉札幌、小樽、富良野、二世古等主要地区。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="advantage-card">
+                                <h3 class="advantage-title">快速报价</h3>
+                                <p class="advantage-text">24小时内回复，便于您快速确定计划。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hire/Private Car Service Section -->
+        <section id="hire" class="content-section">
+            <div class="section-content">
+                <h2 class="section-title" data-ja="ハイヤー・貸切サービス（ドライバー付き）" data-en="Book Ride Car Service (Alphard / HiAce)" data-zh="包车服务（含司机）">ハイヤー・貸切サービス（ドライバー付き）</h2>
+                
+                <div class="content-block" data-lang="ja">
+                    <p class="intro-text">Mineka Hokkaido では、快適で安全な移動をサポートする<br>アルファード／ハイエースのハイヤーサービスをご提供しています。<br>観光（小樽・札幌・富良野・洞爺湖・ニセコほか）、<br>空港送迎、ビジネス移動、ゴルフ送迎、スキー送迎など<br>お客様のご希望に合わせて柔軟に対応いたします。</p>
+                    <ul class="feature-list">
+                        <li>日本語 / 中国語サポート</li>
+                        <li>ベビーシート無料</li>
+                        <li>荷物の多い旅行にも対応可</li>
+                        <li>深夜・早朝も事前予約で対応</li>
+                    </ul>
+                    <p class="pricing-note">料金は行程・時間・季節により異なります。<br>詳しくはお問い合わせください。</p>
+                </div>
+
+                <div class="content-block" data-lang="en" style="display: none;">
+                    <p class="intro-text">We offer comfortable and safe private hire car services with professional drivers.<br>Suitable for airport transfers, sightseeing tours, business travel, golf trips, and ski resorts.</p>
+                    <ul class="feature-list">
+                        <li>English / Chinese / Japanese support</li>
+                        <li>Free child seats</li>
+                        <li>Large luggage, ski gear, and golf bags accepted</li>
+                        <li>Early-morning & late-night service available (reservation required)</li>
+                    </ul>
+                    <p class="pricing-note">Prices vary depending on destination and duration.<br>Please contact us for a quote.</p>
+                </div>
+
+                <div class="content-block" data-lang="zh" style="display: none;">
+                    <p class="intro-text">提供丰田 Alphard / HiAce 豪华包车服务，包括机场接送、观光行程、商务出行、滑雪、高尔夫等各种需求。</p>
+                    <ul class="feature-list">
+                        <li>提供中文 / 日语 / 英语服务</li>
+                        <li>免费儿童安全座椅</li>
+                        <li>可携带大件行李、高尔夫球包、滑雪装备</li>
+                        <li>早晚时间可提前预订</li>
+                    </ul>
+                    <p class="pricing-note">费用会根据行程与时长有所不同，欢迎咨询报价。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tour Model Courses Section -->
+        <section id="tours" class="content-section">
+            <div class="section-content">
+                <h2 class="section-title" data-ja="観光モデルコース" data-en="Tour Model Courses" data-zh="观光路线">観光モデルコース</h2>
+                
+                <div class="tour-courses row g-4 d-flex" data-lang="ja">
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ 小樽・札幌 1日ツアー</h3>
+                        <p class="tour-subtitle">おすすめポイント：歴史・美食・ショッピング</p>
+                        <ul class="tour-list">
+                            <li>小樽運河</li>
+                            <li>北一ガラス</li>
+                            <li>かま栄 工場見学</li>
+                            <li>堺町通り散策</li>
+                            <li>白い恋人パーク</li>
+                            <li>札幌時計台・大通公園</li>
+                        </ul>
+                        <p class="tour-duration">➡ 所要時間 7〜9時間（ご希望により調整可）</p>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ 富良野・美瑛 1日ツアー</h3>
+                        <p class="tour-subtitle">おすすめポイント：北海道らしい絶景</p>
+                        <ul class="tour-list">
+                            <li>青い池</li>
+                            <li>白金の滝</li>
+                            <li>四季彩の丘</li>
+                            <li>パッチワークの路</li>
+                            <li>ファーム富田（季節限定）</li>
+                        </ul>
+                        <p class="tour-duration">➡ 所要時間 8〜10時間</p>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ 洞爺湖・昭和新山・登別 1日ツアー</h3>
+                        <p class="tour-subtitle">おすすめポイント：自然×温泉</p>
+                        <ul class="tour-list">
+                            <li>洞爺湖展望台</li>
+                            <li>有珠山ロープウェイ</li>
+                            <li>昭和新山</li>
+                            <li>登別地獄谷</li>
+                            <li>温泉街散歩</li>
+                        </ul>
+                        <p class="tour-duration">➡ 所要時間 7〜9時間</p>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ ニセコ・羊蹄山エリア</h3>
+                        <p class="tour-subtitle">おすすめポイント：絶景・アクティビティ</p>
+                        <ul class="tour-list">
+                            <li>羊蹄山ビューポイント</li>
+                            <li>ニセコヴィレッジ</li>
+                            <li>京極ふきだし公園</li>
+                            <li>スキー場（冬）</li>
+                            <li>ラフティング（夏）</li>
+                        </ul>
+                        <p class="tour-duration">➡ 所要時間：6〜8時間</p>
+                    </div>
+                </div>
+
+                <div class="tour-courses row g-4 d-none" data-lang="en">
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ Otaru & Sapporo Day Tour</h3>
+                        <ul class="tour-list">
+                            <li>Otaru Canal</li>
+                            <li>Kitaichi Glass</li>
+                            <li>Music Box Museum</li>
+                            <li>Sakaimachi Street</li>
+                            <li>Odori Park (Sapporo)</li>
+                            <li>Shiroi Koibito Park</li>
+                        </ul>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ Furano & Biei Scenic Tour</h3>
+                        <ul class="tour-list">
+                            <li>Blue Pond</li>
+                            <li>Shirahige Waterfall</li>
+                            <li>Shikisai-no-Oka</li>
+                            <li>Patchwork Road</li>
+                            <li>Farm Tomita (seasonal)</li>
+                        </ul>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ Lake Toya & Noboribetsu Onsen</h3>
+                        <ul class="tour-list">
+                            <li>Lake Toya Observatory</li>
+                            <li>Showa Shinzan</li>
+                            <li>Usuzan Ropeway</li>
+                            <li>Jigokudani (Hell Valley)</li>
+                            <li>Onsen town walk</li>
+                        </ul>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ Niseko & Mt. Yotei</h3>
+                        <ul class="tour-list">
+                            <li>Mt. Yotei view spots</li>
+                            <li>Niseko Village</li>
+                            <li>Kyogoku Park</li>
+                            <li>Ski (winter) / Rafting (summer)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tour-courses row g-4 d-none" data-lang="zh">
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ 小樽・札幌 一日游</h3>
+                        <ul class="tour-list">
+                            <li>小樽运河</li>
+                            <li>北一玻璃</li>
+                            <li>音乐盒堂</li>
+                            <li>堺町通美食散策</li>
+                            <li>札幌大通公园</li>
+                            <li>白色恋人公园</li>
+                        </ul>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ 富良野・美瑛 一日游</h3>
+                        <ul class="tour-list">
+                            <li>青池</li>
+                            <li>白金瀑布</li>
+                            <li>四季彩之丘</li>
+                            <li>美瑛拼布之路</li>
+                            <li>富田农场（季节限定）</li>
+                        </ul>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ 洞爷湖・登别 一日游</h3>
+                        <ul class="tour-list">
+                            <li>洞爷湖展望台</li>
+                            <li>昭和新山</li>
+                            <li>有珠山缆车</li>
+                            <li>登别地狱谷</li>
+                            <li>温泉街散策</li>
+                        </ul>
+                    </div>
+
+                    <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <h3 class="tour-title">■ 二世古（Niseko）・羊蹄山</h3>
+                        <ul class="tour-list">
+                            <li>羊蹄山摄影点</li>
+                            <li>二世古度假村</li>
+                            <li>京极吹出公园</li>
+                            <li>冬季滑雪 / 夏季漂流体验</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Children's Clothing Shop Section -->
+        <section id="clothing" class="content-section">
+            <div class="section-content">
+                <h2 class="section-title" data-ja="キッズウェアショップ" data-en="Children's Clothing Shop" data-zh="儿童服装店">キッズウェアショップ</h2>
+                
+                <div class="content-block" data-lang="ja">
+                    <p class="intro-text">Mineka Hokkaido では、お子様向けの高品質なキッズウェアも取り扱っています。<br>北海道の厳しい気候にも対応した、機能性とデザイン性を兼ね備えた商品をご用意しています。</p>
+                    <ul class="feature-list">
+                        <li>ベビー・キッズ向けの季節に合わせた衣類</li>
+                        <li>北海道の冬に最適な防寒着</li>
+                        <li>高品質な素材を使用した安全な商品</li>
+                        <li>サイズ豊富：新生児から小学生まで対応</li>
+                        <li>お客様のご要望に合わせたカスタマイズ対応可能</li>
+                    </ul>
+                    <p class="pricing-note">商品の詳細や在庫状況については、お問い合わせください。<br>オンラインでのご注文も承っております。</p>
+                </div>
+
+                <div class="content-block" data-lang="en" style="display: none;">
+                    <p class="intro-text">Mineka Hokkaido also offers high-quality children's clothing.<br>We provide functional and stylish items designed for Hokkaido's harsh climate.</p>
+                    <ul class="feature-list">
+                        <li>Seasonal clothing for babies and children</li>
+                        <li>Winter wear perfect for Hokkaido's cold weather</li>
+                        <li>Safe products made from high-quality materials</li>
+                        <li>Wide size range: from newborns to elementary school age</li>
+                        <li>Customization available upon request</li>
+                    </ul>
+                    <p class="pricing-note">Please contact us for product details and availability.<br>Online orders are also accepted.</p>
+                </div>
+
+                <div class="content-block" data-lang="zh" style="display: none;">
+                    <p class="intro-text">Mineka Hokkaido 也提供高品质的儿童服装。<br>我们提供适合北海道严酷气候的功能性和时尚性兼备的商品。</p>
+                    <ul class="feature-list">
+                        <li>适合婴儿和儿童的季节性服装</li>
+                        <li>适合北海道冬季的防寒服</li>
+                        <li>使用高品质材料的安全商品</li>
+                        <li>尺寸丰富：从新生儿到小学生都有对应</li>
+                        <li>可根据客户需求进行定制</li>
+                    </ul>
+                    <p class="pricing-note">关于商品详情和库存情况，请咨询我们。<br>我们也接受在线订购。</p>
+                </div>
+
+                <!-- Product Categories -->
+                <div class="clothing-categories row g-4 mt-4">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <h3 class="category-title" data-ja="ベビーウェア" data-en="Baby Wear" data-zh="婴儿服装">ベビーウェア</h3>
+                            <p class="category-desc" data-ja="0〜2歳向けのベビー服・肌着・おむつカバーなど" data-en="Baby clothes, underwear, diaper covers for ages 0-2" data-zh="0-2岁婴儿服装、内衣、尿布套等">0〜2歳向けのベビー服・肌着・おむつカバーなど</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <h3 class="category-title" data-ja="キッズアウター" data-en="Kids Outerwear" data-zh="儿童外套">キッズアウター</h3>
+                            <p class="category-desc" data-ja="防寒着・コート・ジャケット・スノーウェアなど" data-en="Winter wear, coats, jackets, snow wear" data-zh="防寒服、外套、夹克、雪服等">防寒着・コート・ジャケット・スノーウェアなど</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <h3 class="category-title" data-ja="アクセサリー" data-en="Accessories" data-zh="配饰">アクセサリー</h3>
+                            <p class="category-desc" data-ja="帽子・手袋・マフラー・靴下など" data-en="Hats, gloves, scarves, socks" data-zh="帽子、手套、围巾、袜子等">帽子・手袋・マフラー・靴下など</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="content-section">
+            <div class="section-content">
+                <h2 class="section-title" data-ja="Mineka Hokkaido（ミネカ北海道）について" data-en="About Mineka Hokkaido" data-zh="Mineka Hokkaido（ミネカ北海道）">Mineka Hokkaido（ミネカ北海道）について</h2>
+                
+                <div class="content-block" data-lang="ja">
+                    <p class="intro-text">北海道を訪れるお客様に「快適で安心できる移動体験」をお届けする<br>ハイヤー・観光チャーターサービスを提供しています。</p>
+                    <ul class="feature-list">
+                        <li>保有車両：アルファード / ハイエース</li>
+                        <li>対応言語：日本語 / 中国語 / 英語</li>
+                        <li>用途：空港送迎、観光、ビジネス、ゴルフ、スキー</li>
+                        <li>運転手は全員プロとして安全運転を徹底</li>
+                    </ul>
+                    <p class="mission-text">「せっかくの北海道旅行を、もっと快適に、もっと自由に。」<br>それが Mineka Hokkaido のミッションです。</p>
+                </div>
+
+                <div class="content-block" data-lang="en" style="display: none;">
+                    <p class="intro-text">We provide safe, comfortable, and flexible private hire car services for visitors traveling across Hokkaido.<br>Our service areas include Sapporo, Otaru, Furano, Biei, Lake Toya, Noboribetsu, Niseko, and Eastern Hokkaido.</p>
+                    <ul class="feature-list">
+                        <li>Vehicles: Toyota Alphard / HiAce</li>
+                        <li>Languages: English / Chinese / Japanese</li>
+                        <li>Services: Airport transfer, sightseeing charter, business transport, golf & ski transfers</li>
+                        <li>Professional drivers ensuring safety and comfort</li>
+                    </ul>
+                    <p class="mission-text">Our mission:<br>To make your Hokkaido journey easier, more comfortable, and truly memorable.</p>
+                </div>
+
+                <div class="content-block" data-lang="zh" style="display: none;">
+                    <p class="intro-text">我们致力于为来到北海道的旅客提供 舒适、安全、贴心 的包车与观光服务。<br>服务范围包含札幌、小樽、富良野、美瑛、洞爷湖、登别、二世古以及道东地区。</p>
+                    <ul class="feature-list">
+                        <li>车辆：丰田 Alphard / HiAce</li>
+                        <li>语言支持：中文 / 日语 / 英语</li>
+                        <li>服务内容：机场接送、观光包车、商务出行、高尔夫 / 滑雪接送</li>
+                        <li>专业司机，全程安全驾驶</li>
+                    </ul>
+                    <p class="mission-text">我们的使命：<br>让您的北海道之旅变得更轻松、更自由、更难忘。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="content-section">
+            <div class="section-content">
+                <h2 class="section-title" data-ja="よくある質問" data-en="FAQ" data-zh="常见问题">よくある質問</h2>
+                
+                <div class="faq-list" data-lang="ja">
+                    <div class="faq-item">
+                        <div class="faq-question">Q1. 料金はいくらですか？</div>
+                        <div class="faq-answer">→ 行き先・時間・季節により異なるため、都度お見積り となります。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q2. 子ども連れでも利用できますか？</div>
+                        <div class="faq-answer">→ 可能です。チャイルドシート無料でご用意します。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q3. 中国語で対応できますか？</div>
+                        <div class="faq-answer">→ はい、中国語と英語 の対応が可能です。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q4. 荷物が多くても大丈夫ですか？</div>
+                        <div class="faq-answer">→ スーツケース・スキー・ゴルフバッグなど対応可能です。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q5. 深夜や早朝の送迎は可能ですか？</div>
+                        <div class="faq-answer">→ 可能です（事前予約制）。</div>
+                    </div>
+                </div>
+
+                <div class="faq-list" data-lang="en" style="display: none;">
+                    <div class="faq-item">
+                        <div class="faq-question">Q1. How much is the service?</div>
+                        <div class="faq-answer">A: Prices vary depending on distance, duration, and season. Please contact us for a quote.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q2. Is the service suitable for families with children?</div>
+                        <div class="faq-answer">A: Yes, child seats are available free of charge.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q3. Do you offer Chinese or English support?</div>
+                        <div class="faq-answer">A: Yes, our drivers and staff can assist in English, Chinese, and Japanese.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q4. Can you handle large luggage or ski equipment?</div>
+                        <div class="faq-answer">A: Yes, our vehicles fit large suitcases, ski gear, and golf bags.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q5. Is early-morning or late-night service available?</div>
+                        <div class="faq-answer">A: Yes, with advance reservation.</div>
+                    </div>
+                </div>
+
+                <div class="faq-list" data-lang="zh" style="display: none;">
+                    <div class="faq-item">
+                        <div class="faq-question">Q1. 费用是多少？</div>
+                        <div class="faq-answer">A：根据行程、时间、季节不同而变化，请联系我们获取报价。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q2. 可以带小孩吗？</div>
+                        <div class="faq-answer">A：可以，免费提供儿童安全座椅。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q3. 可以用中文沟通吗？</div>
+                        <div class="faq-answer">A：可以，我们支持中文、日语、英语服务。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q4. 行李很多可以吗？</div>
+                        <div class="faq-answer">A：可以，车辆可容纳大件行李、滑雪装备、高尔夫球包等。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Q5. 可以深夜或清晨接送吗？</div>
+                        <div class="faq-answer">A：可以（需提前预约）。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas Section -->
+        <section id="areas" class="content-section">
+            <div class="section-content">
+                <h2 class="section-title" data-ja="送迎可能エリア" data-en="Service Areas" data-zh="服务区域">送迎可能エリア</h2>
+                
+                <div class="content-block" data-lang="ja">
+                    <p class="intro-text">Mineka Hokkaido は北海道全域で対応可能です。<br>特にご依頼の多いエリア：</p>
+                    <ul class="area-list">
+                        <li>札幌市内</li>
+                        <li>小樽</li>
+                        <li>新千歳空港</li>
+                        <li>洞爺湖 / 登別</li>
+                        <li>ニセコ</li>
+                        <li>富良野 / 美瑛</li>
+                        <li>旭川エリア</li>
+                    </ul>
+                    <p class="pricing-note">その他の地域も柔軟に対応いたします。</p>
+                </div>
+
+                <div class="content-block" data-lang="en" style="display: none;">
+                    <p class="intro-text">We operate across all major regions of Hokkaido:</p>
+                    <ul class="area-list">
+                        <li>Sapporo</li>
+                        <li>Otaru</li>
+                        <li>Furano / Biei</li>
+                        <li>Lake Toya / Noboribetsu</li>
+                        <li>Niseko</li>
+                        <li>Asahikawa</li>
+                        <li>Eastern Hokkaido (Kushiro, Akan, Mashu, Shiretoko)</li>
+                    </ul>
+                    <p class="pricing-note">Other areas are available upon request.</p>
+                </div>
+
+                <div class="content-block" data-lang="zh" style="display: none;">
+                    <p class="intro-text">我们提供北海道全区域包车服务，主要覆盖：</p>
+                    <ul class="area-list">
+                        <li>札幌</li>
+                        <li>小樽</li>
+                        <li>富良野 / 美瑛</li>
+                        <li>洞爷湖 / 登别</li>
+                        <li>二世古（Niseko）</li>
+                        <li>旭川</li>
+                        <li>道东地区（钏路、阿寒湖、摩周湖、知床）</li>
+                    </ul>
+                    <p class="pricing-note">如需前往其他地区，也可根据需求安排。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section">
+            <div class="section-content">
+                <h2 class="section-title" data-ja="お問い合わせ・ご予約" data-en="Contact Us" data-zh="联系我们">お問い合わせ・ご予約</h2>
+                
+                <div class="content-block" data-lang="ja">
+                    <p class="intro-text">お問い合わせ・ご予約はこちらから<br>行き先・人数・ご希望日時をお知らせいただければ、<br>担当者より詳細とお見積りをご連絡いたします。</p>
+                    <ul class="contact-list">
+                        <li>・LINE / WeChat からの問い合わせも可能</li>
+                        <li>・24時間以内に返信いたします</li>
+                    </ul>
+                </div>
+
+                <div class="content-block" data-lang="en" style="display: none;">
+                    <p class="intro-text">Feel free to contact us for a quote or customized itinerary.<br>Please provide: date, number of passengers, destinations, and pick-up location.</p>
+                    <ul class="contact-list">
+                        <li>We will reply within 24 hours.</li>
+                        <li>Available via LINE / WeChat / Email / Phone.</li>
+                    </ul>
+                </div>
+
+                <div class="content-block" data-lang="zh" style="display: none;">
+                    <p class="intro-text">欢迎随时联系我们获取报价或行程规划。<br>请告知：出发日期、人数、行程需求、接送地点。</p>
+                    <ul class="contact-list">
+                        <li>我们会在 24 小时内回复您。</li>
+                        <li>支持：LINE / WeChat / 邮件 / 电话</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <p class="footer-text" data-ja="Mineka Hokkaido - 快適で安全な移動体験" data-en="Mineka Hokkaido - Comfortable and Safe Travel Experiences" data-zh="Mineka Hokkaido - 舒适安全的出行体验">Mineka Hokkaido - 快適で安全な移動体験</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+// Language Management
+let currentLang = 'ja';
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initializeNavigation();
+    initializeLanguageSwitcher();
+    initializeAnimations();
+    showSection('home');
+});
+
+// Navigation Management
+function initializeNavigation() {
+    const menuItems = document.querySelectorAll('.menu-item');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = item.getAttribute('data-section');
+            showSection(section);
+            
+            // Update active menu item
+            menuItems.forEach(mi => mi.classList.remove('active'));
+            item.classList.add('active');
+            
+            // Close mobile menu if open
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                } else {
+                    navbarCollapse.classList.remove('show');
+                }
+            }
+        });
+    });
+}
+
+function showSection(sectionId) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show selected section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        setTimeout(() => {
+            targetSection.classList.add('active');
+        }, 50);
+    }
+    
+    // Update menu items
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        if (item.getAttribute('data-section') === sectionId) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+// Language Switcher
+function initializeLanguageSwitcher() {
+    const langButtons = document.querySelectorAll('.lang-btn');
+    
+    langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            switchLanguage(lang);
+            
+            // Update active button
+            langButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+}
+
+function switchLanguage(lang) {
+    currentLang = lang;
+    
+    // Add switching class to all content blocks for fade out
+    const contentBlocks = document.querySelectorAll('.content-block, .tour-courses, .faq-list');
+    contentBlocks.forEach(block => {
+        block.classList.add('language-switching');
+    });
+    
+    // Add switching class to menu items
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.classList.add('language-switching');
+    });
+    
+    // Fade out, then update content
+    setTimeout(() => {
+        // Update all elements with data attributes
+        const elementsWithLang = document.querySelectorAll('[data-ja], [data-en], [data-zh]');
+        elementsWithLang.forEach(element => {
+            const text = element.getAttribute(`data-${lang}`);
+            if (text) {
+                // Add fade transition
+                element.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                element.style.opacity = '0';
+                setTimeout(() => {
+                    element.textContent = text;
+                    element.style.opacity = '1';
+                }, 150);
+            }
+        });
+        
+        // Show/hide content blocks based on language
+        contentBlocks.forEach(block => {
+            const blockLang = block.getAttribute('data-lang');
+            if (blockLang === lang) {
+                // For Bootstrap grid rows, use d-flex
+                if (block.classList.contains('row')) {
+                    block.classList.remove('d-none');
+                    block.classList.add('d-flex', 'language-active');
+                    block.style.display = 'flex';
+                } else {
+                    block.style.display = 'block';
+                    block.classList.remove('d-none');
+                    block.classList.add('language-active');
+                }
+            } else {
+                block.classList.remove('language-active', 'language-switching');
+                if (block.classList.contains('row')) {
+                    block.classList.add('d-none');
+                    block.classList.remove('d-flex');
+                    block.style.display = 'none';
+                } else {
+                    block.style.display = 'none';
+                    block.classList.add('d-none');
+                }
+            }
+        });
+        
+        // Update menu items text with animation
+        updateMenuItemsText(lang);
+        
+        // Remove switching classes after animation
+        setTimeout(() => {
+            contentBlocks.forEach(block => {
+                block.classList.remove('language-switching');
+            });
+            menuItems.forEach(item => {
+                item.classList.remove('language-switching', 'language-active');
+            });
+        }, 400);
+    }, 200);
+}
+
+function updateMenuItemsText(lang) {
+    const menuTexts = {
+        ja: {
+            home: 'ホーム',
+            hire: 'ハイヤー・貸切',
+            tours: '観光モデルコース',
+            clothing: 'キッズウェア',
+            about: '会社紹介',
+            faq: 'よくある質問',
+            areas: '送迎可能エリア',
+            contact: 'お問い合わせ'
+        },
+        en: {
+            home: 'Home',
+            hire: 'Book Ride',
+            tours: 'Tour Courses',
+            clothing: 'Kids Wear',
+            about: 'About Us',
+            faq: 'FAQ',
+            areas: 'Service Areas',
+            contact: 'Contact'
+        },
+        zh: {
+            home: '首页',
+            hire: '包车服务',
+            tours: '观光路线',
+            clothing: '儿童服装',
+            about: '公司介绍',
+            faq: '常见问题',
+            areas: '服务区域',
+            contact: '联系我们'
+        }
+    };
+    
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach((item, index) => {
+        const section = item.getAttribute('data-section');
+        if (menuTexts[lang] && menuTexts[lang][section]) {
+            // Stagger the animation for each menu item
+            setTimeout(() => {
+                item.textContent = menuTexts[lang][section];
+                item.classList.add('language-active');
+                setTimeout(() => {
+                    item.classList.remove('language-active');
+                }, 300);
+            }, index * 30);
+        }
+    });
+}
+
+// Animations
+function initializeAnimations() {
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                entry.target.style.opacity = '1';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.section-content, .tour-card, .faq-item');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Animate footer on load
+    const footer = document.getElementById('footer');
+    if (footer) {
+        setTimeout(() => {
+            footer.style.animation = 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+        }, 300);
+    }
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add hover effects to interactive elements
+document.querySelectorAll('.menu-item, .tour-card, .faq-item').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+});
+
+// Handle window resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        // Reinitialize animations if needed
+        initializeAnimations();
+    }, 250);
+});
+
+// Add loading animation
+window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        document.body.style.opacity = '1';
+    }, 100);
+});
+    </script>
+</body>
+</html>
+
