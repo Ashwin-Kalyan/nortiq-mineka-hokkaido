@@ -205,6 +205,8 @@ if __name__ == '__main__':
         exit(1)
     
     port = int(os.getenv('PORT', 3000))
-    print(f"🚀 Starting server on http://0.0.0.0:{port}")
-    app.run(debug=True, host='0.0.0.0', port=port)
+    # Use debug=False in production (set via environment variable)
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    print(f"🚀 Starting server on http://0.0.0.0:{port} (debug={debug_mode})")
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
 
