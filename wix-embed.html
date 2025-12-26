@@ -15,6 +15,11 @@
 }
 
 :root {
+    --brand-blue: #5B7A9A;
+    --brand-blue-light: #7A9AB8;
+    --brand-blue-dark: #4A6785;
+    --accent-pink: #ff6b6b;
+    --accent-pink-light: #ff8787;
     --gradient-red: #ff6b6b;
     --gradient-white: #ffffff;
     --glass-bg: rgba(255, 255, 255, 0.7);
@@ -128,7 +133,7 @@ body {
 .logo {
     font-size: 20px;
     font-weight: 600;
-    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -331,7 +336,7 @@ body {
 .hero {
     text-align: center;
     padding: 80px 20px;
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 255, 255, 0.3));
+    background: linear-gradient(135deg, rgba(91, 122, 154, 0.1), rgba(255, 255, 255, 0.3));
     backdrop-filter: blur(20px);
     border-radius: var(--border-radius-lg);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -342,7 +347,7 @@ body {
 .hero-title {
     font-size: 48px;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -373,7 +378,7 @@ body {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 30px;
-    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -576,7 +581,7 @@ body {
     font-weight: 700;
     margin-bottom: 12px;
     color: var(--text-primary);
-    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -799,8 +804,8 @@ body {
 
 .form-control:focus {
     outline: none;
-    border-color: var(--gradient-red);
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    border-color: var(--brand-blue);
+    box-shadow: 0 0 0 3px rgba(91, 122, 154, 0.1);
 }
 
 .form-control::placeholder {
@@ -814,7 +819,7 @@ body {
     font-size: 16px;
     font-weight: 600;
     color: white;
-    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
     border: none;
     border-radius: 12px;
     cursor: pointer;
@@ -824,7 +829,7 @@ body {
 
 .btn-submit:hover:not(:disabled) {
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 6px 20px rgba(91, 122, 154, 0.4);
 }
 
 .btn-submit:active:not(:disabled) {
@@ -865,7 +870,7 @@ body {
     font-weight: 700;
     margin-bottom: 12px;
     color: var(--text-primary);
-    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -907,7 +912,7 @@ body {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, var(--gradient-red), #ff8787);
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
