@@ -908,6 +908,18 @@ body {
     border-color: rgba(255, 107, 107, 0.3);
 }
 
+.advantage-card:hover .advantage-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.advantage-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .advantage-title {
     font-size: 18px;
     font-weight: 700;
@@ -916,6 +928,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: center;
 }
 
 .advantage-text {
@@ -923,6 +936,7 @@ body {
     color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
+    text-align: center;
 }
 
 /* FAQ */
@@ -1160,36 +1174,128 @@ html {
                     <div class="advantage-grid row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="affordabilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#81C784;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#affordabilityGrad)" opacity="0.2"/>
+                                    <rect x="25" y="30" width="50" height="35" rx="5" fill="#4CAF50"/>
+                                    <text x="50" y="52" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">¥</text>
+                                    <circle cx="35" cy="20" r="8" fill="#FFD700" stroke="#FFA000" stroke-width="2"/>
+                                    <circle cx="65" cy="20" r="8" fill="#FFD700" stroke="#FFA000" stroke-width="2"/>
+                                    <path d="M 30 75 L 50 85 L 70 75" stroke="#4CAF50" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                                 <h3 class="advantage-title">手頃な価格</h3>
                                 <p class="advantage-text">行程に合わせた柔軟な見積りで、ムダのない料金設定。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="flexibilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#64B5F6;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#flexibilityGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="25" fill="none" stroke="#2196F3" stroke-width="4"/>
+                                    <circle cx="50" cy="50" r="15" fill="none" stroke="#2196F3" stroke-width="3"/>
+                                    <circle cx="50" cy="50" r="5" fill="#2196F3"/>
+                                    <path d="M 50 25 L 50 15 M 50 75 L 50 85 M 25 50 L 15 50 M 75 50 L 85 50" stroke="#2196F3" stroke-width="3" stroke-linecap="round"/>
+                                    <circle cx="30" cy="30" r="6" fill="#FF9800"/>
+                                    <circle cx="70" cy="30" r="6" fill="#FF9800"/>
+                                    <circle cx="30" cy="70" r="6" fill="#FF9800"/>
+                                    <circle cx="70" cy="70" r="6" fill="#FF9800"/>
+                                </svg>
                                 <h3 class="advantage-title">柔軟なカスタマイズ</h3>
                                 <p class="advantage-text">観光・ビジネス・空港送迎まで、ご要望に合わせて調整可能。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="safetyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#F44336;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#E57373;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#safetyGrad)" opacity="0.2"/>
+                                    <path d="M 50 20 L 30 35 L 30 50 Q 30 60 50 75 Q 70 60 70 50 L 70 35 Z" fill="#F44336"/>
+                                    <path d="M 50 25 L 35 37 L 35 50 Q 35 58 50 70 Q 65 58 65 50 L 65 37 Z" fill="#FFCDD2"/>
+                                    <circle cx="50" cy="45" r="8" fill="#FFF" stroke="#F44336" stroke-width="2"/>
+                                    <path d="M 47 45 L 49 47 L 53 43" stroke="#F44336" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <h3 class="advantage-title">安全第一</h3>
                                 <p class="advantage-text">プロドライバーが担当し、チャイルドシートも無料でご用意。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="multilingualGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#BA68C8;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#multilingualGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#9C27B0" stroke-width="3"/>
+                                    <circle cx="50" cy="50" r="25" fill="#E1BEE7" opacity="0.5"/>
+                                    <path d="M 50 20 Q 40 30 50 40 Q 60 30 50 20" fill="#9C27B0"/>
+                                    <path d="M 50 60 Q 40 70 50 80 Q 60 70 50 60" fill="#9C27B0"/>
+                                    <circle cx="35" cy="50" r="5" fill="#FF9800"/>
+                                    <circle cx="65" cy="50" r="5" fill="#FF9800"/>
+                                    <text x="30" y="35" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">中</text>
+                                    <text x="60" y="35" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">EN</text>
+                                    <text x="45" y="70" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">日</text>
+                                </svg>
                                 <h3 class="advantage-title">マルチリンガル対応</h3>
                                 <p class="advantage-text">日本語・英語・中国語でのサポートが可能。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="localGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#localGrad)" opacity="0.2"/>
+                                    <path d="M 20 40 Q 30 30 40 35 Q 50 25 60 30 Q 70 20 80 35 L 75 50 Q 70 60 60 55 Q 50 65 40 60 Q 30 70 25 55 Z" fill="#FF9800" opacity="0.3" stroke="#FF9800" stroke-width="2"/>
+                                    <circle cx="45" cy="45" r="6" fill="#F44336"/>
+                                    <circle cx="55" cy="50" r="5" fill="#2196F3"/>
+                                    <circle cx="35" cy="55" r="4" fill="#4CAF50"/>
+                                    <circle cx="60" cy="40" r="4" fill="#9C27B0"/>
+                                    <path d="M 45 45 L 50 40 M 55 50 L 60 45" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
                                 <h3 class="advantage-title">北海道に強い</h3>
                                 <p class="advantage-text">札幌・小樽・富良野・ニセコなど、主要エリアを熟知。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="fastGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00BCD4;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#4DD0E1;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#fastGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#00BCD4" stroke-width="4"/>
+                                    <circle cx="50" cy="50" r="2" fill="#00BCD4"/>
+                                    <line x1="50" y1="50" x2="50" y2="35" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                                    <line x1="50" y1="50" x2="60" y2="50" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                                    <path d="M 65 25 L 75 20 L 70 30 Z" fill="#FF5722"/>
+                                    <path d="M 70 30 L 80 25 L 75 35 Z" fill="#FF9800"/>
+                                </svg>
                                 <h3 class="advantage-title">迅速な見積り</h3>
                                 <p class="advantage-text">24時間以内に返信し、スムーズにご案内。</p>
                             </div>
@@ -1201,36 +1307,128 @@ html {
                     <div class="advantage-grid row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="affordabilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#81C784;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#affordabilityGrad)" opacity="0.2"/>
+                                    <rect x="25" y="30" width="50" height="35" rx="5" fill="#4CAF50"/>
+                                    <text x="50" y="52" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">¥</text>
+                                    <circle cx="35" cy="20" r="8" fill="#FFD700" stroke="#FFA000" stroke-width="2"/>
+                                    <circle cx="65" cy="20" r="8" fill="#FFD700" stroke="#FFA000" stroke-width="2"/>
+                                    <path d="M 30 75 L 50 85 L 70 75" stroke="#4CAF50" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                                 <h3 class="advantage-title">Affordability</h3>
                                 <p class="advantage-text">Custom quotes matched to your itinerary to avoid wasted cost.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="flexibilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#64B5F6;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#flexibilityGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="25" fill="none" stroke="#2196F3" stroke-width="4"/>
+                                    <circle cx="50" cy="50" r="15" fill="none" stroke="#2196F3" stroke-width="3"/>
+                                    <circle cx="50" cy="50" r="5" fill="#2196F3"/>
+                                    <path d="M 50 25 L 50 15 M 50 75 L 50 85 M 25 50 L 15 50 M 75 50 L 85 50" stroke="#2196F3" stroke-width="3" stroke-linecap="round"/>
+                                    <circle cx="30" cy="30" r="6" fill="#FF9800"/>
+                                    <circle cx="70" cy="30" r="6" fill="#FF9800"/>
+                                    <circle cx="30" cy="70" r="6" fill="#FF9800"/>
+                                    <circle cx="70" cy="70" r="6" fill="#FF9800"/>
+                                </svg>
                                 <h3 class="advantage-title">Flexibility</h3>
                                 <p class="advantage-text">Airport, sightseeing, business—routes adjusted to your needs.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="safetyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#F44336;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#E57373;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#safetyGrad)" opacity="0.2"/>
+                                    <path d="M 50 20 L 30 35 L 30 50 Q 30 60 50 75 Q 70 60 70 50 L 70 35 Z" fill="#F44336"/>
+                                    <path d="M 50 25 L 35 37 L 35 50 Q 35 58 50 70 Q 65 58 65 50 L 65 37 Z" fill="#FFCDD2"/>
+                                    <circle cx="50" cy="45" r="8" fill="#FFF" stroke="#F44336" stroke-width="2"/>
+                                    <path d="M 47 45 L 49 47 L 53 43" stroke="#F44336" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <h3 class="advantage-title">Safety First</h3>
                                 <p class="advantage-text">Professional drivers; free child seats available on request.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="multilingualGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#BA68C8;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#multilingualGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#9C27B0" stroke-width="3"/>
+                                    <circle cx="50" cy="50" r="25" fill="#E1BEE7" opacity="0.5"/>
+                                    <path d="M 50 20 Q 40 30 50 40 Q 60 30 50 20" fill="#9C27B0"/>
+                                    <path d="M 50 60 Q 40 70 50 80 Q 60 70 50 60" fill="#9C27B0"/>
+                                    <circle cx="35" cy="50" r="5" fill="#FF9800"/>
+                                    <circle cx="65" cy="50" r="5" fill="#FF9800"/>
+                                    <text x="30" y="35" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">中</text>
+                                    <text x="60" y="35" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">EN</text>
+                                    <text x="45" y="70" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">日</text>
+                                </svg>
                                 <h3 class="advantage-title">Multilingual Support</h3>
                                 <p class="advantage-text">Service in English, Chinese, and Japanese.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="localGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#localGrad)" opacity="0.2"/>
+                                    <path d="M 20 40 Q 30 30 40 35 Q 50 25 60 30 Q 70 20 80 35 L 75 50 Q 70 60 60 55 Q 50 65 40 60 Q 30 70 25 55 Z" fill="#FF9800" opacity="0.3" stroke="#FF9800" stroke-width="2"/>
+                                    <circle cx="45" cy="45" r="6" fill="#F44336"/>
+                                    <circle cx="55" cy="50" r="5" fill="#2196F3"/>
+                                    <circle cx="35" cy="55" r="4" fill="#4CAF50"/>
+                                    <circle cx="60" cy="40" r="4" fill="#9C27B0"/>
+                                    <path d="M 45 45 L 50 40 M 55 50 L 60 45" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
                                 <h3 class="advantage-title">Local Expertise</h3>
                                 <p class="advantage-text">Deep knowledge of Sapporo, Otaru, Furano, Niseko, and more.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="fastGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00BCD4;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#4DD0E1;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#fastGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#00BCD4" stroke-width="4"/>
+                                    <circle cx="50" cy="50" r="2" fill="#00BCD4"/>
+                                    <line x1="50" y1="50" x2="50" y2="35" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                                    <line x1="50" y1="50" x2="60" y2="50" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                                    <path d="M 65 25 L 75 20 L 70 30 Z" fill="#FF5722"/>
+                                    <path d="M 70 30 L 80 25 L 75 35 Z" fill="#FF9800"/>
+                                </svg>
                                 <h3 class="advantage-title">Fast Quotes</h3>
                                 <p class="advantage-text">Responses within 24 hours to keep plans moving.</p>
                             </div>
@@ -1242,36 +1440,128 @@ html {
                     <div class="advantage-grid row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="affordabilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#81C784;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#affordabilityGrad)" opacity="0.2"/>
+                                    <rect x="25" y="30" width="50" height="35" rx="5" fill="#4CAF50"/>
+                                    <text x="50" y="52" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">¥</text>
+                                    <circle cx="35" cy="20" r="8" fill="#FFD700" stroke="#FFA000" stroke-width="2"/>
+                                    <circle cx="65" cy="20" r="8" fill="#FFD700" stroke="#FFA000" stroke-width="2"/>
+                                    <path d="M 30 75 L 50 85 L 70 75" stroke="#4CAF50" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                </svg>
                                 <h3 class="advantage-title">价格实惠</h3>
                                 <p class="advantage-text">根据行程灵活报价，避免不必要的费用。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="flexibilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#64B5F6;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#flexibilityGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="25" fill="none" stroke="#2196F3" stroke-width="4"/>
+                                    <circle cx="50" cy="50" r="15" fill="none" stroke="#2196F3" stroke-width="3"/>
+                                    <circle cx="50" cy="50" r="5" fill="#2196F3"/>
+                                    <path d="M 50 25 L 50 15 M 50 75 L 50 85 M 25 50 L 15 50 M 75 50 L 85 50" stroke="#2196F3" stroke-width="3" stroke-linecap="round"/>
+                                    <circle cx="30" cy="30" r="6" fill="#FF9800"/>
+                                    <circle cx="70" cy="30" r="6" fill="#FF9800"/>
+                                    <circle cx="30" cy="70" r="6" fill="#FF9800"/>
+                                    <circle cx="70" cy="70" r="6" fill="#FF9800"/>
+                                </svg>
                                 <h3 class="advantage-title">灵活行程</h3>
                                 <p class="advantage-text">机场接送、观光、商务等需求均可调整。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="safetyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#F44336;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#E57373;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#safetyGrad)" opacity="0.2"/>
+                                    <path d="M 50 20 L 30 35 L 30 50 Q 30 60 50 75 Q 70 60 70 50 L 70 35 Z" fill="#F44336"/>
+                                    <path d="M 50 25 L 35 37 L 35 50 Q 35 58 50 70 Q 65 58 65 50 L 65 37 Z" fill="#FFCDD2"/>
+                                    <circle cx="50" cy="45" r="8" fill="#FFF" stroke="#F44336" stroke-width="2"/>
+                                    <path d="M 47 45 L 49 47 L 53 43" stroke="#F44336" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <h3 class="advantage-title">安全优先</h3>
                                 <p class="advantage-text">专业司机负责驾驶，免费提供儿童安全座椅。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="multilingualGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#BA68C8;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#multilingualGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#9C27B0" stroke-width="3"/>
+                                    <circle cx="50" cy="50" r="25" fill="#E1BEE7" opacity="0.5"/>
+                                    <path d="M 50 20 Q 40 30 50 40 Q 60 30 50 20" fill="#9C27B0"/>
+                                    <path d="M 50 60 Q 40 70 50 80 Q 60 70 50 60" fill="#9C27B0"/>
+                                    <circle cx="35" cy="50" r="5" fill="#FF9800"/>
+                                    <circle cx="65" cy="50" r="5" fill="#FF9800"/>
+                                    <text x="30" y="35" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">中</text>
+                                    <text x="60" y="35" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">EN</text>
+                                    <text x="45" y="70" font-family="Arial, sans-serif" font-size="12" fill="#9C27B0">日</text>
+                                </svg>
                                 <h3 class="advantage-title">多语言支持</h3>
                                 <p class="advantage-text">支持中文、日语、英语服务。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="localGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#localGrad)" opacity="0.2"/>
+                                    <path d="M 20 40 Q 30 30 40 35 Q 50 25 60 30 Q 70 20 80 35 L 75 50 Q 70 60 60 55 Q 50 65 40 60 Q 30 70 25 55 Z" fill="#FF9800" opacity="0.3" stroke="#FF9800" stroke-width="2"/>
+                                    <circle cx="45" cy="45" r="6" fill="#F44336"/>
+                                    <circle cx="55" cy="50" r="5" fill="#2196F3"/>
+                                    <circle cx="35" cy="55" r="4" fill="#4CAF50"/>
+                                    <circle cx="60" cy="40" r="4" fill="#9C27B0"/>
+                                    <path d="M 45 45 L 50 40 M 55 50 L 60 45" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
                                 <h3 class="advantage-title">北海道专业</h3>
                                 <p class="advantage-text">熟悉札幌、小樽、富良野、二世古等主要地区。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="fastGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00BCD4;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#4DD0E1;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#fastGrad)" opacity="0.2"/>
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#00BCD4" stroke-width="4"/>
+                                    <circle cx="50" cy="50" r="2" fill="#00BCD4"/>
+                                    <line x1="50" y1="50" x2="50" y2="35" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                                    <line x1="50" y1="50" x2="60" y2="50" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                                    <path d="M 65 25 L 75 20 L 70 30 Z" fill="#FF5722"/>
+                                    <path d="M 70 30 L 80 25 L 75 35 Z" fill="#FF9800"/>
+                                </svg>
                                 <h3 class="advantage-title">快速报价</h3>
                                 <p class="advantage-text">24小时内回复，便于您快速确定计划。</p>
                             </div>

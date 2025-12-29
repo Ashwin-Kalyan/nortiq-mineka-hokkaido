@@ -44,6 +44,66 @@ body {
     padding-bottom: 80px;
 }
 
+/* Progress Tracker */
+.progress-tracker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 10001;
+    background: none !important;
+    pointer-events: none;
+    --scroll-progress: 0;
+    overflow: hidden;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.progress-tracker::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #5B7A9A 0%, #7A9AB8 100%);
+    transform-origin: left center;
+    transform: scaleX(var(--scroll-progress));
+    will-change: transform;
+    box-shadow: 0 2px 8px rgba(91, 122, 154, 0.4);
+    display: block;
+    min-width: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #ff8787 0%, #ff6b6b 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(245, 247, 250, 0.5);
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff6b6b 0%, #ff5252 100%);
+}
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #ff6b6b #f5f7fa;
+}
+
 /* Override Bootstrap defaults */
 .navbar-brand {
     margin-right: 0;
@@ -63,7 +123,7 @@ body {
 /* Frosted Glass Menubar */
 .menubar {
     position: fixed;
-    top: 0;
+    top: 4px;
     left: 0;
     right: 0;
     min-height: 60px;
@@ -576,6 +636,18 @@ body {
     border-color: rgba(255, 107, 107, 0.3);
 }
 
+.tour-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tour-card:hover .tour-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
 .tour-title {
     font-size: 20px;
     font-weight: 700;
@@ -585,6 +657,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: center;
 }
 
 .tour-subtitle {
@@ -773,8 +846,39 @@ body {
     backdrop-filter: blur(10px);
     border-radius: var(--border-radius);
     padding: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+
+.booking-form-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 24px;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-form:hover .booking-form-icon {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+.section-header-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 24px;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-content:hover .section-header-icon {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.feature-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .form-group {
@@ -908,6 +1012,18 @@ body {
     border-color: rgba(255, 107, 107, 0.3);
 }
 
+.advantage-card:hover .advantage-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.advantage-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .advantage-title {
     font-size: 18px;
     font-weight: 700;
@@ -916,6 +1032,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: center;
 }
 
 .advantage-text {
@@ -923,6 +1040,7 @@ body {
     color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
+    text-align: center;
 }
 
 /* FAQ */
@@ -966,6 +1084,27 @@ body {
     transform: translateX(8px);
     box-shadow: var(--shadow-md);
     border-color: rgba(255, 107, 107, 0.3);
+}
+
+.faq-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.faq-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item:hover .faq-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.faq-content {
+    flex: 1;
 }
 
 .faq-question {
@@ -1101,6 +1240,9 @@ html {
     </style>
 </head>
 <body>
+    <!-- Progress Tracker -->
+    <div class="progress-tracker" id="progressTracker"></div>
+    
     <!-- Frosted Glass Menubar -->
     <nav class="menubar navbar navbar-expand-lg" id="menubar">
         <div class="container-fluid menubar-content">
@@ -1160,36 +1302,167 @@ html {
                     <div class="advantage-grid row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="affordabilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="coinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFA000;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadow">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#affordabilityGrad)" opacity="0.15"/>
+                                    <rect x="28" y="32" width="44" height="32" rx="6" fill="url(#affordabilityGrad)" filter="url(#shadow)"/>
+                                    <rect x="30" y="34" width="40" height="28" rx="4" fill="#FFF" opacity="0.95"/>
+                                    <text x="50" y="54" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2E7D32" text-anchor="middle">¥</text>
+                                    <circle cx="32" cy="22" r="7" fill="url(#coinGrad)" filter="url(#shadow)"/>
+                                    <circle cx="32" cy="22" r="5" fill="#FFD700" opacity="0.9"/>
+                                    <circle cx="68" cy="22" r="7" fill="url(#coinGrad)" filter="url(#shadow)"/>
+                                    <circle cx="68" cy="22" r="5" fill="#FFD700" opacity="0.9"/>
+                                    <path d="M 32 72 Q 50 80 68 72" stroke="url(#affordabilityGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+                                </svg>
                                 <h3 class="advantage-title">手頃な価格</h3>
                                 <p class="advantage-text">行程に合わせた柔軟な見積りで、ムダのない料金設定。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="flexibilityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#1565C0;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadow">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#flexibilityGrad)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="28" fill="none" stroke="url(#flexibilityGrad)" stroke-width="3.5" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="18" fill="none" stroke="url(#flexibilityGrad)" stroke-width="2.5" opacity="0.7"/>
+                                    <circle cx="50" cy="50" r="6" fill="url(#flexibilityGrad)"/>
+                                    <path d="M 50 22 L 50 12 M 50 78 L 50 88 M 22 50 L 12 50 M 78 50 L 88 50" stroke="url(#flexibilityGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+                                    <circle cx="28" cy="28" r="5.5" fill="url(#gearGrad)" filter="url(#shadow)"/>
+                                    <circle cx="72" cy="28" r="5.5" fill="url(#gearGrad)" filter="url(#shadow)"/>
+                                    <circle cx="28" cy="72" r="5.5" fill="url(#gearGrad)" filter="url(#shadow)"/>
+                                    <circle cx="72" cy="72" r="5.5" fill="url(#gearGrad)" filter="url(#shadow)"/>
+                                </svg>
                                 <h3 class="advantage-title">柔軟なカスタマイズ</h3>
                                 <p class="advantage-text">観光・ビジネス・空港送迎まで、ご要望に合わせて調整可能。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="safetyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#C62828;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#F44336;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadow">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#safetyGrad)" opacity="0.15"/>
+                                    <path d="M 50 18 L 28 34 L 28 50 Q 28 62 50 78 Q 72 62 72 50 L 72 34 Z" fill="url(#safetyGrad)" filter="url(#shadow)"/>
+                                    <path d="M 50 22 L 32 36 L 32 50 Q 32 60 50 74 Q 68 60 68 50 L 68 36 Z" fill="#FFF" opacity="0.95"/>
+                                    <circle cx="50" cy="44" r="9" fill="#FFF" filter="url(#shadow)"/>
+                                    <circle cx="50" cy="44" r="7" fill="url(#safetyGrad)" opacity="0.1"/>
+                                    <path d="M 46 44 L 48.5 47 L 54 41" stroke="url(#safetyGrad)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <h3 class="advantage-title">安全第一</h3>
                                 <p class="advantage-text">プロドライバーが担当し、チャイルドシートも無料でご用意。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="multilingualGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6A1B9A;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadow">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#multilingualGrad)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="32" fill="none" stroke="url(#multilingualGrad)" stroke-width="3.5" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="26" fill="#E1BEE7" opacity="0.4"/>
+                                    <path d="M 50 18 Q 38 28 50 38 Q 62 28 50 18" fill="url(#multilingualGrad)"/>
+                                    <path d="M 50 62 Q 38 72 50 82 Q 62 72 50 62" fill="url(#multilingualGrad)"/>
+                                    <circle cx="33" cy="50" r="6" fill="#FF9800" filter="url(#shadow)"/>
+                                    <circle cx="67" cy="50" r="6" fill="#FF9800" filter="url(#shadow)"/>
+                                    <text x="28" y="33" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">中</text>
+                                    <text x="58" y="33" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">EN</text>
+                                    <text x="43" y="72" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">日</text>
+                                </svg>
                                 <h3 class="advantage-title">マルチリンガル対応</h3>
                                 <p class="advantage-text">日本語・英語・中国語でのサポートが可能。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="localGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadow">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#localGrad)" opacity="0.15"/>
+                                    <path d="M 18 38 Q 28 28 38 33 Q 48 23 58 28 Q 68 18 82 33 L 77 48 Q 72 58 62 53 Q 52 63 42 58 Q 32 68 23 53 Z" fill="url(#localGrad)" opacity="0.25" stroke="url(#localGrad)" stroke-width="2.5" filter="url(#shadow)"/>
+                                    <circle cx="44" cy="44" r="6.5" fill="#F44336" filter="url(#shadow)"/>
+                                    <circle cx="44" cy="44" r="4.5" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="56" cy="49" r="5.5" fill="#2196F3" filter="url(#shadow)"/>
+                                    <circle cx="56" cy="49" r="3.5" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="33" cy="54" r="5" fill="#4CAF50" filter="url(#shadow)"/>
+                                    <circle cx="33" cy="54" r="3" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="60" cy="39" r="5" fill="#9C27B0" filter="url(#shadow)"/>
+                                    <circle cx="60" cy="39" r="3" fill="#FFF" opacity="0.3"/>
+                                    <path d="M 44 44 L 49 39 M 56 49 L 61 44" stroke="url(#localGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+                                </svg>
                                 <h3 class="advantage-title">北海道に強い</h3>
                                 <p class="advantage-text">札幌・小樽・富良野・ニセコなど、主要エリアを熟知。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="fastGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00838F;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00BCD4;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="speedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF5722;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadow">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#fastGrad)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="32" fill="none" stroke="url(#fastGrad)" stroke-width="4" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="3" fill="url(#fastGrad)"/>
+                                    <line x1="50" y1="50" x2="50" y2="33" stroke="url(#fastGrad)" stroke-width="3.5" stroke-linecap="round"/>
+                                    <line x1="50" y1="50" x2="62" y2="50" stroke="url(#fastGrad)" stroke-width="3.5" stroke-linecap="round"/>
+                                    <path d="M 63 23 L 73 18 L 68 28 Z" fill="url(#speedGrad)" filter="url(#shadow)"/>
+                                    <path d="M 68 28 L 78 23 L 73 33 Z" fill="url(#speedGrad)" opacity="0.9" filter="url(#shadow)"/>
+                                    <path d="M 73 33 L 81 29 L 77 37 Z" fill="url(#speedGrad)" opacity="0.7" filter="url(#shadow)"/>
+                                </svg>
                                 <h3 class="advantage-title">迅速な見積り</h3>
                                 <p class="advantage-text">24時間以内に返信し、スムーズにご案内。</p>
                             </div>
@@ -1201,36 +1474,167 @@ html {
                     <div class="advantage-grid row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="affordabilityGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="coinGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFA000;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowEn">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#affordabilityGradEn)" opacity="0.15"/>
+                                    <rect x="28" y="32" width="44" height="32" rx="6" fill="url(#affordabilityGradEn)" filter="url(#shadowEn)"/>
+                                    <rect x="30" y="34" width="40" height="28" rx="4" fill="#FFF" opacity="0.95"/>
+                                    <text x="50" y="54" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2E7D32" text-anchor="middle">¥</text>
+                                    <circle cx="32" cy="22" r="7" fill="url(#coinGradEn)" filter="url(#shadowEn)"/>
+                                    <circle cx="32" cy="22" r="5" fill="#FFD700" opacity="0.9"/>
+                                    <circle cx="68" cy="22" r="7" fill="url(#coinGradEn)" filter="url(#shadowEn)"/>
+                                    <circle cx="68" cy="22" r="5" fill="#FFD700" opacity="0.9"/>
+                                    <path d="M 32 72 Q 50 80 68 72" stroke="url(#affordabilityGradEn)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+                                </svg>
                                 <h3 class="advantage-title">Affordability</h3>
                                 <p class="advantage-text">Custom quotes matched to your itinerary to avoid wasted cost.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="flexibilityGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#1565C0;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="gearGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowEn2">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#flexibilityGradEn)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="28" fill="none" stroke="url(#flexibilityGradEn)" stroke-width="3.5" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="18" fill="none" stroke="url(#flexibilityGradEn)" stroke-width="2.5" opacity="0.7"/>
+                                    <circle cx="50" cy="50" r="6" fill="url(#flexibilityGradEn)"/>
+                                    <path d="M 50 22 L 50 12 M 50 78 L 50 88 M 22 50 L 12 50 M 78 50 L 88 50" stroke="url(#flexibilityGradEn)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+                                    <circle cx="28" cy="28" r="5.5" fill="url(#gearGradEn)" filter="url(#shadowEn2)"/>
+                                    <circle cx="72" cy="28" r="5.5" fill="url(#gearGradEn)" filter="url(#shadowEn2)"/>
+                                    <circle cx="28" cy="72" r="5.5" fill="url(#gearGradEn)" filter="url(#shadowEn2)"/>
+                                    <circle cx="72" cy="72" r="5.5" fill="url(#gearGradEn)" filter="url(#shadowEn2)"/>
+                                </svg>
                                 <h3 class="advantage-title">Flexibility</h3>
                                 <p class="advantage-text">Airport, sightseeing, business—routes adjusted to your needs.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="safetyGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#C62828;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#F44336;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowEn3">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#safetyGradEn)" opacity="0.15"/>
+                                    <path d="M 50 18 L 28 34 L 28 50 Q 28 62 50 78 Q 72 62 72 50 L 72 34 Z" fill="url(#safetyGradEn)" filter="url(#shadowEn3)"/>
+                                    <path d="M 50 22 L 32 36 L 32 50 Q 32 60 50 74 Q 68 60 68 50 L 68 36 Z" fill="#FFF" opacity="0.95"/>
+                                    <circle cx="50" cy="44" r="9" fill="#FFF" filter="url(#shadowEn3)"/>
+                                    <circle cx="50" cy="44" r="7" fill="url(#safetyGradEn)" opacity="0.1"/>
+                                    <path d="M 46 44 L 48.5 47 L 54 41" stroke="url(#safetyGradEn)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <h3 class="advantage-title">Safety First</h3>
                                 <p class="advantage-text">Professional drivers; free child seats available on request.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="multilingualGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6A1B9A;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowEn4">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#multilingualGradEn)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="32" fill="none" stroke="url(#multilingualGradEn)" stroke-width="3.5" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="26" fill="#E1BEE7" opacity="0.4"/>
+                                    <path d="M 50 18 Q 38 28 50 38 Q 62 28 50 18" fill="url(#multilingualGradEn)"/>
+                                    <path d="M 50 62 Q 38 72 50 82 Q 62 72 50 62" fill="url(#multilingualGradEn)"/>
+                                    <circle cx="33" cy="50" r="6" fill="#FF9800" filter="url(#shadowEn4)"/>
+                                    <circle cx="67" cy="50" r="6" fill="#FF9800" filter="url(#shadowEn4)"/>
+                                    <text x="28" y="33" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">中</text>
+                                    <text x="58" y="33" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">EN</text>
+                                    <text x="43" y="72" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">日</text>
+                                </svg>
                                 <h3 class="advantage-title">Multilingual Support</h3>
                                 <p class="advantage-text">Service in English, Chinese, and Japanese.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="localGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowEn5">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#localGradEn)" opacity="0.15"/>
+                                    <path d="M 18 38 Q 28 28 38 33 Q 48 23 58 28 Q 68 18 82 33 L 77 48 Q 72 58 62 53 Q 52 63 42 58 Q 32 68 23 53 Z" fill="url(#localGradEn)" opacity="0.25" stroke="url(#localGradEn)" stroke-width="2.5" filter="url(#shadowEn5)"/>
+                                    <circle cx="44" cy="44" r="6.5" fill="#F44336" filter="url(#shadowEn5)"/>
+                                    <circle cx="44" cy="44" r="4.5" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="56" cy="49" r="5.5" fill="#2196F3" filter="url(#shadowEn5)"/>
+                                    <circle cx="56" cy="49" r="3.5" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="33" cy="54" r="5" fill="#4CAF50" filter="url(#shadowEn5)"/>
+                                    <circle cx="33" cy="54" r="3" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="60" cy="39" r="5" fill="#9C27B0" filter="url(#shadowEn5)"/>
+                                    <circle cx="60" cy="39" r="3" fill="#FFF" opacity="0.3"/>
+                                    <path d="M 44 44 L 49 39 M 56 49 L 61 44" stroke="url(#localGradEn)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+                                </svg>
                                 <h3 class="advantage-title">Local Expertise</h3>
                                 <p class="advantage-text">Deep knowledge of Sapporo, Otaru, Furano, Niseko, and more.</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="fastGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00838F;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00BCD4;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="speedGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF5722;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowEn6">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#fastGradEn)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="32" fill="none" stroke="url(#fastGradEn)" stroke-width="4" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="3" fill="url(#fastGradEn)"/>
+                                    <line x1="50" y1="50" x2="50" y2="33" stroke="url(#fastGradEn)" stroke-width="3.5" stroke-linecap="round"/>
+                                    <line x1="50" y1="50" x2="62" y2="50" stroke="url(#fastGradEn)" stroke-width="3.5" stroke-linecap="round"/>
+                                    <path d="M 63 23 L 73 18 L 68 28 Z" fill="url(#speedGradEn)" filter="url(#shadowEn6)"/>
+                                    <path d="M 68 28 L 78 23 L 73 33 Z" fill="url(#speedGradEn)" opacity="0.9" filter="url(#shadowEn6)"/>
+                                    <path d="M 73 33 L 81 29 L 77 37 Z" fill="url(#speedGradEn)" opacity="0.7" filter="url(#shadowEn6)"/>
+                                </svg>
                                 <h3 class="advantage-title">Fast Quotes</h3>
                                 <p class="advantage-text">Responses within 24 hours to keep plans moving.</p>
                             </div>
@@ -1242,36 +1646,167 @@ html {
                     <div class="advantage-grid row g-4">
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="affordabilityGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="coinGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFA000;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowZh">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#affordabilityGradZh)" opacity="0.15"/>
+                                    <rect x="28" y="32" width="44" height="32" rx="6" fill="url(#affordabilityGradZh)" filter="url(#shadowZh)"/>
+                                    <rect x="30" y="34" width="40" height="28" rx="4" fill="#FFF" opacity="0.95"/>
+                                    <text x="50" y="54" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#2E7D32" text-anchor="middle">¥</text>
+                                    <circle cx="32" cy="22" r="7" fill="url(#coinGradZh)" filter="url(#shadowZh)"/>
+                                    <circle cx="32" cy="22" r="5" fill="#FFD700" opacity="0.9"/>
+                                    <circle cx="68" cy="22" r="7" fill="url(#coinGradZh)" filter="url(#shadowZh)"/>
+                                    <circle cx="68" cy="22" r="5" fill="#FFD700" opacity="0.9"/>
+                                    <path d="M 32 72 Q 50 80 68 72" stroke="url(#affordabilityGradZh)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+                                </svg>
                                 <h3 class="advantage-title">价格实惠</h3>
                                 <p class="advantage-text">根据行程灵活报价，避免不必要的费用。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="flexibilityGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#1565C0;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="gearGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowZh2">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#flexibilityGradZh)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="28" fill="none" stroke="url(#flexibilityGradZh)" stroke-width="3.5" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="18" fill="none" stroke="url(#flexibilityGradZh)" stroke-width="2.5" opacity="0.7"/>
+                                    <circle cx="50" cy="50" r="6" fill="url(#flexibilityGradZh)"/>
+                                    <path d="M 50 22 L 50 12 M 50 78 L 50 88 M 22 50 L 12 50 M 78 50 L 88 50" stroke="url(#flexibilityGradZh)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+                                    <circle cx="28" cy="28" r="5.5" fill="url(#gearGradZh)" filter="url(#shadowZh2)"/>
+                                    <circle cx="72" cy="28" r="5.5" fill="url(#gearGradZh)" filter="url(#shadowZh2)"/>
+                                    <circle cx="28" cy="72" r="5.5" fill="url(#gearGradZh)" filter="url(#shadowZh2)"/>
+                                    <circle cx="72" cy="72" r="5.5" fill="url(#gearGradZh)" filter="url(#shadowZh2)"/>
+                                </svg>
                                 <h3 class="advantage-title">灵活行程</h3>
                                 <p class="advantage-text">机场接送、观光、商务等需求均可调整。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="safetyGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#C62828;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#F44336;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowZh3">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#safetyGradZh)" opacity="0.15"/>
+                                    <path d="M 50 18 L 28 34 L 28 50 Q 28 62 50 78 Q 72 62 72 50 L 72 34 Z" fill="url(#safetyGradZh)" filter="url(#shadowZh3)"/>
+                                    <path d="M 50 22 L 32 36 L 32 50 Q 32 60 50 74 Q 68 60 68 50 L 68 36 Z" fill="#FFF" opacity="0.95"/>
+                                    <circle cx="50" cy="44" r="9" fill="#FFF" filter="url(#shadowZh3)"/>
+                                    <circle cx="50" cy="44" r="7" fill="url(#safetyGradZh)" opacity="0.1"/>
+                                    <path d="M 46 44 L 48.5 47 L 54 41" stroke="url(#safetyGradZh)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <h3 class="advantage-title">安全优先</h3>
                                 <p class="advantage-text">专业司机负责驾驶，免费提供儿童安全座椅。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="multilingualGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6A1B9A;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowZh4">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#multilingualGradZh)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="32" fill="none" stroke="url(#multilingualGradZh)" stroke-width="3.5" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="26" fill="#E1BEE7" opacity="0.4"/>
+                                    <path d="M 50 18 Q 38 28 50 38 Q 62 28 50 18" fill="url(#multilingualGradZh)"/>
+                                    <path d="M 50 62 Q 38 72 50 82 Q 62 72 50 62" fill="url(#multilingualGradZh)"/>
+                                    <circle cx="33" cy="50" r="6" fill="#FF9800" filter="url(#shadowZh4)"/>
+                                    <circle cx="67" cy="50" r="6" fill="#FF9800" filter="url(#shadowZh4)"/>
+                                    <text x="28" y="33" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">中</text>
+                                    <text x="58" y="33" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">EN</text>
+                                    <text x="43" y="72" font-family="Arial, sans-serif" font-size="11" font-weight="600" fill="#6A1B9A">日</text>
+                                </svg>
                                 <h3 class="advantage-title">多语言支持</h3>
                                 <p class="advantage-text">支持中文、日语、英语服务。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="localGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#E65100;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowZh5">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#localGradZh)" opacity="0.15"/>
+                                    <path d="M 18 38 Q 28 28 38 33 Q 48 23 58 28 Q 68 18 82 33 L 77 48 Q 72 58 62 53 Q 52 63 42 58 Q 32 68 23 53 Z" fill="url(#localGradZh)" opacity="0.25" stroke="url(#localGradZh)" stroke-width="2.5" filter="url(#shadowZh5)"/>
+                                    <circle cx="44" cy="44" r="6.5" fill="#F44336" filter="url(#shadowZh5)"/>
+                                    <circle cx="44" cy="44" r="4.5" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="56" cy="49" r="5.5" fill="#2196F3" filter="url(#shadowZh5)"/>
+                                    <circle cx="56" cy="49" r="3.5" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="33" cy="54" r="5" fill="#4CAF50" filter="url(#shadowZh5)"/>
+                                    <circle cx="33" cy="54" r="3" fill="#FFF" opacity="0.3"/>
+                                    <circle cx="60" cy="39" r="5" fill="#9C27B0" filter="url(#shadowZh5)"/>
+                                    <circle cx="60" cy="39" r="3" fill="#FFF" opacity="0.3"/>
+                                    <path d="M 44 44 L 49 39 M 56 49 L 61 44" stroke="url(#localGradZh)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+                                </svg>
                                 <h3 class="advantage-title">北海道专业</h3>
                                 <p class="advantage-text">熟悉札幌、小樽、富良野、二世古等主要地区。</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="advantage-card">
+                                <svg class="advantage-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="fastGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#00838F;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#00BCD4;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="speedGradZh" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#FF5722;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+                                        </linearGradient>
+                                        <filter id="shadowZh6">
+                                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="45" fill="url(#fastGradZh)" opacity="0.15"/>
+                                    <circle cx="50" cy="50" r="32" fill="none" stroke="url(#fastGradZh)" stroke-width="4" opacity="0.9"/>
+                                    <circle cx="50" cy="50" r="3" fill="url(#fastGradZh)"/>
+                                    <line x1="50" y1="50" x2="50" y2="33" stroke="url(#fastGradZh)" stroke-width="3.5" stroke-linecap="round"/>
+                                    <line x1="50" y1="50" x2="62" y2="50" stroke="url(#fastGradZh)" stroke-width="3.5" stroke-linecap="round"/>
+                                    <path d="M 63 23 L 73 18 L 68 28 Z" fill="url(#speedGradZh)" filter="url(#shadowZh6)"/>
+                                    <path d="M 68 28 L 78 23 L 73 33 Z" fill="url(#speedGradZh)" opacity="0.9" filter="url(#shadowZh6)"/>
+                                    <path d="M 73 33 L 81 29 L 77 37 Z" fill="url(#speedGradZh)" opacity="0.7" filter="url(#shadowZh6)"/>
+                                </svg>
                                 <h3 class="advantage-title">快速报价</h3>
                                 <p class="advantage-text">24小时内回复，便于您快速确定计划。</p>
                             </div>
@@ -1286,6 +1821,37 @@ html {
             <div class="section-content">
                 <h2 class="section-title" data-ja="■ハイヤー・貸切サービス(ドライバー付き)" data-en="■ Private Hire Car Service (Alphard / HiAce)" data-zh="包车服务 (含司机)">■ハイヤー・貸切サービス(ドライバー付き)</h2>
                 
+                <svg class="section-header-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="carGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#64B5F6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="url(#carGrad)" opacity="0.15"/>
+                    <!-- Car Body -->
+                    <rect x="20" y="45" width="60" height="25" rx="5" fill="url(#carGrad)"/>
+                    <rect x="25" y="40" width="50" height="20" rx="4" fill="url(#carGrad)" opacity="0.8"/>
+                    <!-- Windows -->
+                    <rect x="30" y="42" width="18" height="12" rx="2" fill="#E3F2FD" opacity="0.9"/>
+                    <rect x="52" y="42" width="18" height="12" rx="2" fill="#E3F2FD" opacity="0.9"/>
+                    <!-- Window Dividers -->
+                    <line x1="48" y1="42" x2="48" y2="54" stroke="url(#carGrad)" stroke-width="1.5"/>
+                    <line x1="30" y1="48" x2="70" y2="48" stroke="url(#carGrad)" stroke-width="1.5" opacity="0.5"/>
+                    <!-- Wheels -->
+                    <circle cx="32" cy="70" r="6" fill="#1a1a1a"/>
+                    <circle cx="32" cy="70" r="4" fill="#424242"/>
+                    <circle cx="32" cy="70" r="2" fill="#FFF"/>
+                    <circle cx="68" cy="70" r="6" fill="#1a1a1a"/>
+                    <circle cx="68" cy="70" r="4" fill="#424242"/>
+                    <circle cx="68" cy="70" r="2" fill="#FFF"/>
+                    <!-- Headlights -->
+                    <circle cx="22" cy="52" r="3" fill="#FFD700"/>
+                    <circle cx="78" cy="52" r="3" fill="#FFD700"/>
+                    <!-- Door Handle -->
+                    <rect x="45" y="58" width="10" height="2" rx="1" fill="url(#carGrad)" opacity="0.6"/>
+                </svg>
+                
                 <div class="content-block" data-lang="ja">
                     <p class="intro-text">Mineka Hokkaido では、快適で安全な移動をサポートする アルファード/ハイエースのハイヤーサービスをご提供しています。<br>観光(小樽・札幌・富良野・洞爺湖・ニセコほか)、 空港送迎、ビジネス移動、ゴルフ送迎、スキー送迎など お客様のご希望に合わせて柔軟に対応いたします。</p>
                     <ul class="feature-list">
@@ -1299,6 +1865,22 @@ html {
 
                 <!-- Booking Form -->
                 <div class="booking-form">
+                    <svg class="booking-form-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bookingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FF8E8E;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#bookingGrad)" opacity="0.2"/>
+                        <rect x="20" y="25" width="60" height="50" rx="5" fill="#FF6B6B"/>
+                        <rect x="25" y="30" width="50" height="40" rx="3" fill="#FFF"/>
+                        <line x1="30" y1="40" x2="70" y2="40" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="30" y1="50" x2="65" y2="50" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="30" y1="60" x2="60" y2="60" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="75" cy="20" r="8" fill="#4CAF50"/>
+                        <path d="M 72 20 L 75 23 L 78 20" stroke="#FFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <h3 class="section-title" style="font-size: 24px; margin-bottom: 20px;" data-ja="ご予約フォーム" data-en="Booking Form" data-zh="预订表单">ご予約フォーム</h3>
                     
                     <form id="bookingForm">
@@ -1336,6 +1918,22 @@ html {
 
                 <!-- Booking Form (English) -->
                 <div class="booking-form" data-lang="en" style="display: none;">
+                    <svg class="booking-form-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bookingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FF8E8E;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#bookingGrad)" opacity="0.2"/>
+                        <rect x="20" y="25" width="60" height="50" rx="5" fill="#FF6B6B"/>
+                        <rect x="25" y="30" width="50" height="40" rx="3" fill="#FFF"/>
+                        <line x1="30" y1="40" x2="70" y2="40" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="30" y1="50" x2="65" y2="50" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="30" y1="60" x2="60" y2="60" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="75" cy="20" r="8" fill="#4CAF50"/>
+                        <path d="M 72 20 L 75 23 L 78 20" stroke="#FFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <h3 class="section-title" style="font-size: 24px; margin-bottom: 20px;">Booking Form</h3>
                     
                     <form id="bookingFormEn">
@@ -1373,6 +1971,22 @@ html {
 
                 <!-- Booking Form (Chinese) -->
                 <div class="booking-form" data-lang="zh" style="display: none;">
+                    <svg class="booking-form-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bookingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FF8E8E;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#bookingGrad)" opacity="0.2"/>
+                        <rect x="20" y="25" width="60" height="50" rx="5" fill="#FF6B6B"/>
+                        <rect x="25" y="30" width="50" height="40" rx="3" fill="#FFF"/>
+                        <line x1="30" y1="40" x2="70" y2="40" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="30" y1="50" x2="65" y2="50" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="30" y1="60" x2="60" y2="60" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="75" cy="20" r="8" fill="#4CAF50"/>
+                        <path d="M 72 20 L 75 23 L 78 20" stroke="#FFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <h3 class="section-title" style="font-size: 24px; margin-bottom: 20px;">预订表单</h3>
                     
                     <form id="bookingFormZh">
@@ -1406,6 +2020,15 @@ html {
                 
                 <div class="tour-courses row g-4 d-flex" data-lang="ja">
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#2196F3" opacity="0.2"/>
+                            <rect x="20" y="40" width="15" height="25" fill="#2196F3"/>
+                            <rect x="38" y="35" width="15" height="30" fill="#2196F3"/>
+                            <rect x="56" y="30" width="15" height="35" fill="#2196F3"/>
+                            <rect x="74" y="45" width="10" height="20" fill="#2196F3"/>
+                            <circle cx="30" cy="30" r="5" fill="#FFD700"/>
+                            <circle cx="70" cy="30" r="5" fill="#FFD700"/>
+                        </svg>
                         <h3 class="tour-title">■ 小樽・札幌1日ツアー</h3>
                         <p class="tour-subtitle">おすすめポイント: 歴史・美食・ショッピング</p>
                         <ul class="tour-list">
@@ -1420,6 +2043,14 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#4CAF50" opacity="0.2"/>
+                            <path d="M 20 60 Q 30 40 50 45 Q 70 40 80 60 L 80 80 L 20 80 Z" fill="#4CAF50"/>
+                            <circle cx="35" cy="50" r="8" fill="#2196F3"/>
+                            <circle cx="50" cy="45" r="6" fill="#2196F3"/>
+                            <circle cx="65" cy="50" r="7" fill="#2196F3"/>
+                            <path d="M 30 35 Q 50 25 70 35" stroke="#FFD700" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        </svg>
                         <h3 class="tour-title">■ 富良野・美瑛1日ツアー</h3>
                         <p class="tour-subtitle">おすすめポイント: 北海道らしい絶景</p>
                         <ul class="tour-list">
@@ -1433,6 +2064,14 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FF5722" opacity="0.2"/>
+                            <ellipse cx="50" cy="55" rx="30" ry="20" fill="#2196F3" opacity="0.6"/>
+                            <path d="M 30 50 Q 50 30 70 50" stroke="#FF5722" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            <circle cx="50" cy="25" r="8" fill="#FFD700"/>
+                            <path d="M 20 70 Q 30 65 40 70" stroke="#FF5722" stroke-width="3" fill="none"/>
+                            <path d="M 60 70 Q 70 65 80 70" stroke="#FF5722" stroke-width="3" fill="none"/>
+                        </svg>
                         <h3 class="tour-title">■ 洞爺湖・昭和新山・登別1日ツアー</h3>
                         <p class="tour-subtitle">おすすめポイント: 自然×温泉</p>
                         <ul class="tour-list">
@@ -1446,6 +2085,13 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#9C27B0" opacity="0.2"/>
+                            <path d="M 30 70 Q 50 20 70 70 L 70 80 L 30 80 Z" fill="#9C27B0"/>
+                            <path d="M 35 70 Q 50 30 65 70" stroke="#FFF" stroke-width="2" fill="none"/>
+                            <circle cx="50" cy="15" r="6" fill="#FFD700"/>
+                            <path d="M 25 75 L 30 70 M 75 75 L 70 70" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
                         <h3 class="tour-title">■ ニセコ・羊蹄山エリア</h3>
                         <p class="tour-subtitle">おすすめポイント: 絶景・アクティビティ</p>
                         <ul class="tour-list">
@@ -1461,6 +2107,15 @@ html {
 
                 <div class="tour-courses row g-4 d-none" data-lang="en">
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#2196F3" opacity="0.2"/>
+                            <rect x="20" y="40" width="15" height="25" fill="#2196F3"/>
+                            <rect x="38" y="35" width="15" height="30" fill="#2196F3"/>
+                            <rect x="56" y="30" width="15" height="35" fill="#2196F3"/>
+                            <rect x="74" y="45" width="10" height="20" fill="#2196F3"/>
+                            <circle cx="30" cy="30" r="5" fill="#FFD700"/>
+                            <circle cx="70" cy="30" r="5" fill="#FFD700"/>
+                        </svg>
                         <h3 class="tour-title">■ Otaru & Sapporo Day Tour</h3>
                         <ul class="tour-list">
                             <li>Otaru Canal</li>
@@ -1473,6 +2128,14 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#4CAF50" opacity="0.2"/>
+                            <path d="M 20 60 Q 30 40 50 45 Q 70 40 80 60 L 80 80 L 20 80 Z" fill="#4CAF50"/>
+                            <circle cx="35" cy="50" r="8" fill="#2196F3"/>
+                            <circle cx="50" cy="45" r="6" fill="#2196F3"/>
+                            <circle cx="65" cy="50" r="7" fill="#2196F3"/>
+                            <path d="M 30 35 Q 50 25 70 35" stroke="#FFD700" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        </svg>
                         <h3 class="tour-title">■ Furano & Biei Scenic Tour</h3>
                         <ul class="tour-list">
                             <li>Blue Pond</li>
@@ -1484,6 +2147,14 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FF5722" opacity="0.2"/>
+                            <ellipse cx="50" cy="55" rx="30" ry="20" fill="#2196F3" opacity="0.6"/>
+                            <path d="M 30 50 Q 50 30 70 50" stroke="#FF5722" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            <circle cx="50" cy="25" r="8" fill="#FFD700"/>
+                            <path d="M 20 70 Q 30 65 40 70" stroke="#FF5722" stroke-width="3" fill="none"/>
+                            <path d="M 60 70 Q 70 65 80 70" stroke="#FF5722" stroke-width="3" fill="none"/>
+                        </svg>
                         <h3 class="tour-title">■ Lake Toya & Noboribetsu Onsen</h3>
                         <ul class="tour-list">
                             <li>Lake Toya Observatory</li>
@@ -1495,6 +2166,13 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#9C27B0" opacity="0.2"/>
+                            <path d="M 30 70 Q 50 20 70 70 L 70 80 L 30 80 Z" fill="#9C27B0"/>
+                            <path d="M 35 70 Q 50 30 65 70" stroke="#FFF" stroke-width="2" fill="none"/>
+                            <circle cx="50" cy="15" r="6" fill="#FFD700"/>
+                            <path d="M 25 75 L 30 70 M 75 75 L 70 70" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
                         <h3 class="tour-title">■ Niseko & Mt. Yotei</h3>
                         <ul class="tour-list">
                             <li>Mt. Yotei view spots</li>
@@ -1507,6 +2185,15 @@ html {
 
                 <div class="tour-courses row g-4 d-none" data-lang="zh">
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#2196F3" opacity="0.2"/>
+                            <rect x="20" y="40" width="15" height="25" fill="#2196F3"/>
+                            <rect x="38" y="35" width="15" height="30" fill="#2196F3"/>
+                            <rect x="56" y="30" width="15" height="35" fill="#2196F3"/>
+                            <rect x="74" y="45" width="10" height="20" fill="#2196F3"/>
+                            <circle cx="30" cy="30" r="5" fill="#FFD700"/>
+                            <circle cx="70" cy="30" r="5" fill="#FFD700"/>
+                        </svg>
                         <h3 class="tour-title">■ 小樽・札幌一日游</h3>
                         <ul class="tour-list">
                             <li>小樽运河</li>
@@ -1519,6 +2206,14 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#4CAF50" opacity="0.2"/>
+                            <path d="M 20 60 Q 30 40 50 45 Q 70 40 80 60 L 80 80 L 20 80 Z" fill="#4CAF50"/>
+                            <circle cx="35" cy="50" r="8" fill="#2196F3"/>
+                            <circle cx="50" cy="45" r="6" fill="#2196F3"/>
+                            <circle cx="65" cy="50" r="7" fill="#2196F3"/>
+                            <path d="M 30 35 Q 50 25 70 35" stroke="#FFD700" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        </svg>
                         <h3 class="tour-title">■ 富良野・美瑛一日游</h3>
                         <ul class="tour-list">
                             <li>青池</li>
@@ -1530,6 +2225,14 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FF5722" opacity="0.2"/>
+                            <ellipse cx="50" cy="55" rx="30" ry="20" fill="#2196F3" opacity="0.6"/>
+                            <path d="M 30 50 Q 50 30 70 50" stroke="#FF5722" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            <circle cx="50" cy="25" r="8" fill="#FFD700"/>
+                            <path d="M 20 70 Q 30 65 40 70" stroke="#FF5722" stroke-width="3" fill="none"/>
+                            <path d="M 60 70 Q 70 65 80 70" stroke="#FF5722" stroke-width="3" fill="none"/>
+                        </svg>
                         <h3 class="tour-title">■ 洞爷湖・登别一日游</h3>
                         <ul class="tour-list">
                             <li>洞爷湖展望台</li>
@@ -1541,6 +2244,13 @@ html {
                     </div>
 
                     <div class="tour-card col-12 col-md-6 col-lg-3">
+                        <svg class="tour-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#9C27B0" opacity="0.2"/>
+                            <path d="M 30 70 Q 50 20 70 70 L 70 80 L 30 80 Z" fill="#9C27B0"/>
+                            <path d="M 35 70 Q 50 30 65 70" stroke="#FFF" stroke-width="2" fill="none"/>
+                            <circle cx="50" cy="15" r="6" fill="#FFD700"/>
+                            <path d="M 25 75 L 30 70 M 75 75 L 70 70" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
                         <h3 class="tour-title">■ 二世古(Niseko)・羊蹄山</h3>
                         <ul class="tour-list">
                             <li>羊蹄山摄影点</li>
@@ -2039,6 +2749,26 @@ html {
             <div class="section-content">
                 <h2 class="section-title" data-ja="Mineka Hokkaido（ミネカ北海道）" data-en="About Mineka Hokkaido" data-zh="Mineka Hokkaido (ミネカ北海道)">Mineka Hokkaido（ミネカ北海道）</h2>
                 
+                <svg class="section-header-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="url(#aboutGrad)" opacity="0.2"/>
+                    <rect x="25" y="30" width="50" height="40" rx="5" fill="#FF9800"/>
+                    <rect x="30" y="35" width="40" height="30" rx="3" fill="#FFF"/>
+                    <circle cx="40" cy="45" r="8" fill="#FF9800"/>
+                    <rect x="45" y="42" width="20" height="6" rx="3" fill="#FF9800"/>
+                    <rect x="45" y="50" width="15" height="6" rx="3" fill="#FF9800"/>
+                    <rect x="45" y="58" width="18" height="6" rx="3" fill="#FF9800"/>
+                    <path d="M 20 75 L 50 85 L 80 75" stroke="#FF9800" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <circle cx="35" cy="75" r="4" fill="#4CAF50"/>
+                    <circle cx="50" cy="75" r="4" fill="#2196F3"/>
+                    <circle cx="65" cy="75" r="4" fill="#9C27B0"/>
+                </svg>
+                
                 <div class="content-block" data-lang="ja">
                     <p class="intro-text">北海道を訪れるお客様に「快適で安心できる移動体験」をお届けする<br>ハイヤー・観光チャーターサービスを提供しています。</p>
                     <ul class="feature-list">
@@ -2081,70 +2811,223 @@ html {
                 
                 <div class="faq-list" data-lang="ja">
                     <div class="faq-item">
-                        <div class="faq-question">Q1. 料金はいくらですか?</div>
-                        <div class="faq-answer">→ 行き先・時間・季節により異なるため、都度お見積りとなります。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#4CAF50" opacity="0.2"/>
+                            <rect x="25" y="30" width="50" height="35" rx="5" fill="#4CAF50"/>
+                            <text x="50" y="52" font-family="Arial" font-size="20" font-weight="bold" fill="white" text-anchor="middle">¥</text>
+                            <circle cx="35" cy="20" r="6" fill="#FFD700"/>
+                            <circle cx="65" cy="20" r="6" fill="#FFD700"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q1. 料金はいくらですか?</div>
+                            <div class="faq-answer">→ 行き先・時間・季節により異なるため、都度お見積りとなります。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q2. 子ども連れでも利用できますか?</div>
-                        <div class="faq-answer">→ 可能です。チャイルドシート無料でご用意します。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FF9800" opacity="0.2"/>
+                            <circle cx="50" cy="45" r="20" fill="#FF9800"/>
+                            <circle cx="50" cy="45" r="15" fill="#FFF"/>
+                            <circle cx="47" cy="42" r="2" fill="#FF9800"/>
+                            <circle cx="53" cy="42" r="2" fill="#FF9800"/>
+                            <path d="M 45 50 Q 50 55 55 50" stroke="#FF9800" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <rect x="40" y="60" width="20" height="15" rx="3" fill="#FF9800"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q2. 子ども連れでも利用できますか?</div>
+                            <div class="faq-answer">→ 可能です。チャイルドシート無料でご用意します。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q3. 中国語で対応できますか?</div>
-                        <div class="faq-answer">→ はい、中国語と英語の対応が可能です。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#9C27B0" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="#9C27B0" stroke-width="3"/>
+                            <circle cx="50" cy="50" r="20" fill="#E1BEE7" opacity="0.5"/>
+                            <text x="35" y="40" font-family="Arial" font-size="12" fill="#9C27B0">中</text>
+                            <text x="55" y="40" font-family="Arial" font-size="12" fill="#9C27B0">EN</text>
+                            <text x="45" y="65" font-family="Arial" font-size="12" fill="#9C27B0">日</text>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q3. 中国語で対応できますか?</div>
+                            <div class="faq-answer">→ はい、中国語と英語の対応が可能です。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q4. 荷物が多くても大丈夫ですか?</div>
-                        <div class="faq-answer">→ スーツケース・スキー・ゴルフバッグなど対応可能です。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#2196F3" opacity="0.2"/>
+                            <rect x="30" y="35" width="40" height="30" rx="3" fill="#2196F3"/>
+                            <rect x="35" y="40" width="30" height="20" rx="2" fill="#FFF"/>
+                            <circle cx="45" cy="50" r="3" fill="#2196F3"/>
+                            <path d="M 50 50 L 60 50" stroke="#2196F3" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="25" y="70" width="50" height="8" rx="2" fill="#2196F3"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q4. 荷物が多くても大丈夫ですか?</div>
+                            <div class="faq-answer">→ スーツケース・スキー・ゴルフバッグなど対応可能です。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q5. 深夜や早朝の送迎は可能ですか?</div>
-                        <div class="faq-answer">→ 可能です（事前予約制）。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#00BCD4" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="#00BCD4" stroke-width="4"/>
+                            <circle cx="50" cy="50" r="2" fill="#00BCD4"/>
+                            <line x1="50" y1="50" x2="50" y2="35" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="50" y1="50" x2="60" y2="50" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="50" cy="20" r="8" fill="#FF5722"/>
+                            <circle cx="50" cy="80" r="8" fill="#FF9800"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q5. 深夜や早朝の送迎は可能ですか?</div>
+                            <div class="faq-answer">→ 可能です（事前予約制）。</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="faq-list" data-lang="en" style="display: none;">
                     <div class="faq-item">
-                        <div class="faq-question">Q1. How much is the service?</div>
-                        <div class="faq-answer">A: Prices vary depending on distance, duration, and season. Please contact us for a quote.</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#4CAF50" opacity="0.2"/>
+                            <rect x="25" y="30" width="50" height="35" rx="5" fill="#4CAF50"/>
+                            <text x="50" y="52" font-family="Arial" font-size="20" font-weight="bold" fill="white" text-anchor="middle">¥</text>
+                            <circle cx="35" cy="20" r="6" fill="#FFD700"/>
+                            <circle cx="65" cy="20" r="6" fill="#FFD700"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q1. How much is the service?</div>
+                            <div class="faq-answer">A: Prices vary depending on distance, duration, and season. Please contact us for a quote.</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q2. Is the service suitable for families with children?</div>
-                        <div class="faq-answer">A: Yes, child seats are available free of charge.</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FF9800" opacity="0.2"/>
+                            <circle cx="50" cy="45" r="20" fill="#FF9800"/>
+                            <circle cx="50" cy="45" r="15" fill="#FFF"/>
+                            <circle cx="47" cy="42" r="2" fill="#FF9800"/>
+                            <circle cx="53" cy="42" r="2" fill="#FF9800"/>
+                            <path d="M 45 50 Q 50 55 55 50" stroke="#FF9800" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <rect x="40" y="60" width="20" height="15" rx="3" fill="#FF9800"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q2. Is the service suitable for families with children?</div>
+                            <div class="faq-answer">A: Yes, child seats are available free of charge.</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q3. Do you offer Chinese or English support?</div>
-                        <div class="faq-answer">A: Yes, our drivers and staff can assist in English, Chinese, and Japanese.</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#9C27B0" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="#9C27B0" stroke-width="3"/>
+                            <circle cx="50" cy="50" r="20" fill="#E1BEE7" opacity="0.5"/>
+                            <text x="35" y="40" font-family="Arial" font-size="12" fill="#9C27B0">中</text>
+                            <text x="55" y="40" font-family="Arial" font-size="12" fill="#9C27B0">EN</text>
+                            <text x="45" y="65" font-family="Arial" font-size="12" fill="#9C27B0">日</text>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q3. Do you offer Chinese or English support?</div>
+                            <div class="faq-answer">A: Yes, our drivers and staff can assist in English, Chinese, and Japanese.</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q4. Can you handle large luggage or ski equipment?</div>
-                        <div class="faq-answer">A: Yes, our vehicles fit large suitcases, ski gear, and golf bags.</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#2196F3" opacity="0.2"/>
+                            <rect x="30" y="35" width="40" height="30" rx="3" fill="#2196F3"/>
+                            <rect x="35" y="40" width="30" height="20" rx="2" fill="#FFF"/>
+                            <circle cx="45" cy="50" r="3" fill="#2196F3"/>
+                            <path d="M 50 50 L 60 50" stroke="#2196F3" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="25" y="70" width="50" height="8" rx="2" fill="#2196F3"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q4. Can you handle large luggage or ski equipment?</div>
+                            <div class="faq-answer">A: Yes, our vehicles fit large suitcases, ski gear, and golf bags.</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q5. Is early-morning or late-night service available?</div>
-                        <div class="faq-answer">A: Yes, with advance reservation.</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#00BCD4" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="#00BCD4" stroke-width="4"/>
+                            <circle cx="50" cy="50" r="2" fill="#00BCD4"/>
+                            <line x1="50" y1="50" x2="50" y2="35" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="50" y1="50" x2="60" y2="50" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="50" cy="20" r="8" fill="#FF5722"/>
+                            <circle cx="50" cy="80" r="8" fill="#FF9800"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q5. Is early-morning or late-night service available?</div>
+                            <div class="faq-answer">A: Yes, with advance reservation.</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="faq-list" data-lang="zh" style="display: none;">
                     <div class="faq-item">
-                        <div class="faq-question">Q1. 费用是多少?</div>
-                        <div class="faq-answer">A: 根据行程、时间、季节不同而变化,请联系我们获取报价。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#4CAF50" opacity="0.2"/>
+                            <rect x="25" y="30" width="50" height="35" rx="5" fill="#4CAF50"/>
+                            <text x="50" y="52" font-family="Arial" font-size="20" font-weight="bold" fill="white" text-anchor="middle">¥</text>
+                            <circle cx="35" cy="20" r="6" fill="#FFD700"/>
+                            <circle cx="65" cy="20" r="6" fill="#FFD700"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q1. 费用是多少?</div>
+                            <div class="faq-answer">A: 根据行程、时间、季节不同而变化,请联系我们获取报价。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q2. 可以带小孩吗?</div>
-                        <div class="faq-answer">A: 可以,免费提供儿童安全座椅。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FF9800" opacity="0.2"/>
+                            <circle cx="50" cy="45" r="20" fill="#FF9800"/>
+                            <circle cx="50" cy="45" r="15" fill="#FFF"/>
+                            <circle cx="47" cy="42" r="2" fill="#FF9800"/>
+                            <circle cx="53" cy="42" r="2" fill="#FF9800"/>
+                            <path d="M 45 50 Q 50 55 55 50" stroke="#FF9800" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <rect x="40" y="60" width="20" height="15" rx="3" fill="#FF9800"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q2. 可以带小孩吗?</div>
+                            <div class="faq-answer">A: 可以,免费提供儿童安全座椅。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q3. 可以用中文沟通吗?</div>
-                        <div class="faq-answer">A: 可以,我们支持中文、日语、英语服务。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#9C27B0" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="#9C27B0" stroke-width="3"/>
+                            <circle cx="50" cy="50" r="20" fill="#E1BEE7" opacity="0.5"/>
+                            <text x="35" y="40" font-family="Arial" font-size="12" fill="#9C27B0">中</text>
+                            <text x="55" y="40" font-family="Arial" font-size="12" fill="#9C27B0">EN</text>
+                            <text x="45" y="65" font-family="Arial" font-size="12" fill="#9C27B0">日</text>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q3. 可以用中文沟通吗?</div>
+                            <div class="faq-answer">A: 可以,我们支持中文、日语、英语服务。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q4. 行李很多可以吗?</div>
-                        <div class="faq-answer">A: 可以,车辆可容纳大件行李、滑雪装备、高尔夫球包等。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#2196F3" opacity="0.2"/>
+                            <rect x="30" y="35" width="40" height="30" rx="3" fill="#2196F3"/>
+                            <rect x="35" y="40" width="30" height="20" rx="2" fill="#FFF"/>
+                            <circle cx="45" cy="50" r="3" fill="#2196F3"/>
+                            <path d="M 50 50 L 60 50" stroke="#2196F3" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="25" y="70" width="50" height="8" rx="2" fill="#2196F3"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q4. 行李很多可以吗?</div>
+                            <div class="faq-answer">A: 可以,车辆可容纳大件行李、滑雪装备、高尔夫球包等。</div>
+                        </div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question">Q5. 可以深夜或清晨接送吗?</div>
-                        <div class="faq-answer">A: 可以(需提前预约)。</div>
+                        <svg class="faq-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#00BCD4" opacity="0.2"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="#00BCD4" stroke-width="4"/>
+                            <circle cx="50" cy="50" r="2" fill="#00BCD4"/>
+                            <line x1="50" y1="50" x2="50" y2="35" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="50" y1="50" x2="60" y2="50" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="50" cy="20" r="8" fill="#FF5722"/>
+                            <circle cx="50" cy="80" r="8" fill="#FF9800"/>
+                        </svg>
+                        <div class="faq-content">
+                            <div class="faq-question">Q5. 可以深夜或清晨接送吗?</div>
+                            <div class="faq-answer">A: 可以(需提前预约)。</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2154,6 +3037,31 @@ html {
         <section id="areas" class="content-section">
             <div class="section-content">
                 <h2 class="section-title" data-ja="送迎可能エリア" data-en="Service Areas" data-zh="服务区域">送迎可能エリア</h2>
+                
+                <svg class="section-header-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="hokkaidoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FFB74D;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="url(#hokkaidoGrad)" opacity="0.15"/>
+                    <!-- Hokkaido Island Shape -->
+                    <path d="M 25 30 Q 30 25 35 30 Q 40 28 45 32 Q 50 30 55 32 Q 60 30 65 35 Q 70 32 75 38 L 72 50 Q 70 60 65 62 Q 60 65 55 63 Q 50 65 45 63 Q 40 65 35 62 Q 30 60 28 50 Z" fill="url(#hokkaidoGrad)" opacity="0.3" stroke="url(#hokkaidoGrad)" stroke-width="2.5"/>
+                    <!-- Location pins for major cities -->
+                    <circle cx="45" cy="40" r="4" fill="#F44336"/>
+                    <circle cx="45" cy="40" r="2" fill="#FFF"/>
+                    <circle cx="55" cy="45" r="3.5" fill="#2196F3"/>
+                    <circle cx="55" cy="45" r="1.5" fill="#FFF"/>
+                    <circle cx="40" cy="50" r="3" fill="#4CAF50"/>
+                    <circle cx="40" cy="50" r="1.5" fill="#FFF"/>
+                    <circle cx="60" cy="50" r="3" fill="#9C27B0"/>
+                    <circle cx="60" cy="50" r="1.5" fill="#FFF"/>
+                    <circle cx="50" cy="55" r="3" fill="#00BCD4"/>
+                    <circle cx="50" cy="55" r="1.5" fill="#FFF"/>
+                    <!-- Connection lines -->
+                    <path d="M 45 40 L 50 45 M 55 45 L 50 50" stroke="url(#hokkaidoGrad)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                </svg>
                 
                 <div class="content-block" data-lang="ja">
                     <p class="intro-text">Mineka Hokkaido は北海道全域で対応可能です。<br>特にご依頼の多いエリア:</p>
@@ -2204,6 +3112,41 @@ html {
             <div class="section-content">
                 <h2 class="section-title" data-ja="お問い合わせ・ご予約" data-en="Contact Us" data-zh="联系我们">お問い合わせ・ご予約</h2>
                 
+                <div style="display: flex; justify-content: center; gap: 40px; margin: 0 auto 24px; flex-wrap: wrap;">
+                    <svg class="section-header-icon" style="width: 100px; height: 100px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#2196F3;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#64B5F6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#phoneGrad)" opacity="0.15"/>
+                        <rect x="30" y="20" width="40" height="60" rx="8" fill="url(#phoneGrad)"/>
+                        <rect x="33" y="25" width="34" height="50" rx="5" fill="#FFF"/>
+                        <rect x="38" y="30" width="24" height="3" rx="1.5" fill="#2196F3" opacity="0.3"/>
+                        <circle cx="50" cy="80" r="4" fill="#2196F3"/>
+                        <rect x="45" y="40" width="10" height="25" rx="2" fill="#2196F3" opacity="0.2"/>
+                        <line x1="42" y1="48" x2="58" y2="48" stroke="#2196F3" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="42" y1="54" x2="58" y2="54" stroke="#2196F3" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="42" y1="60" x2="58" y2="60" stroke="#2196F3" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="section-header-icon" style="width: 100px; height: 100px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="emailGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FF8787;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#emailGrad)" opacity="0.15"/>
+                        <rect x="25" y="35" width="50" height="35" rx="4" fill="url(#emailGrad)"/>
+                        <rect x="27" y="37" width="46" height="31" rx="3" fill="#FFF"/>
+                        <path d="M 25 35 L 50 50 L 75 35" stroke="url(#emailGrad)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <line x1="35" y1="45" x2="65" y2="45" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                        <line x1="35" y1="52" x2="60" y2="52" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                        <line x1="35" y1="58" x2="55" y2="58" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                    </svg>
+                </div>
+                
                 <div class="content-block" data-lang="ja">
                     <p class="intro-text">お問い合わせ・ご予約はこちらから<br>行き先・人数・ご希望日時をお知らせいただければ、担当者より詳細とお見積りをご連絡いたします。</p>
                     <ul class="contact-list">
@@ -2249,8 +3192,64 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeNavigation();
     initializeLanguageSwitcher();
     initializeAnimations();
+    initializeProgressTracker();
     showSection('home');
 });
+
+// Progress Tracker
+function initializeProgressTracker() {
+    const progressTracker = document.getElementById('progressTracker');
+    let rafId = null;
+    
+    function updateProgress() {
+        // Cancel any pending animation frame to prevent queue buildup
+        if (rafId !== null) {
+            cancelAnimationFrame(rafId);
+        }
+        
+        rafId = requestAnimationFrame(() => {
+            // Get accurate scroll measurements using multiple methods for compatibility
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            const documentHeight = Math.max(
+                document.body.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.clientHeight,
+                document.documentElement.scrollHeight,
+                document.documentElement.offsetHeight
+            );
+            const scrollTop = window.pageYOffset || 
+                             document.documentElement.scrollTop || 
+                             document.body.scrollTop || 
+                             0;
+            
+            // Calculate scrollable distance
+            const scrollableHeight = documentHeight - windowHeight;
+            
+            // Calculate progress (0 to 1) - accurately represents scroll position
+            let progress = 0;
+            if (scrollableHeight > 0) {
+                progress = scrollTop / scrollableHeight;
+                // Clamp between 0 and 1
+                progress = Math.min(1, Math.max(0, progress));
+            }
+            
+            // Update CSS custom property for smooth, hardware-accelerated transform
+            progressTracker.style.setProperty('--scroll-progress', progress);
+            
+            rafId = null;
+        });
+    }
+    
+    // Use passive event listeners for optimal scroll performance
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress, { passive: true });
+    
+    // Initial update
+    updateProgress();
+    
+    // Update on load to handle dynamic content
+    window.addEventListener('load', updateProgress, { passive: true });
+}
 
 // Navigation Management
 function initializeNavigation() {
