@@ -69,11 +69,26 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 50px;
+    overflow: hidden;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    object-position: center top;
+    margin-top: -5px;
+}
+
+.logo-text {
     font-size: 22px;
     font-weight: 700;
     color: var(--brand-blue);
     letter-spacing: -0.5px;
-    text-decoration: none;
 }
 
 .menu-items {
@@ -165,13 +180,12 @@ body {
 /* Hero Section - Full Width Professional Banner */
 .hero {
     text-align: center;
-    padding: 150px 20px;
     background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f8f9fa" width="1200" height="600"/><path d="M0,300 Q300,200 600,300 T1200,300" stroke="%23e9ecef" stroke-width="2" fill="none" opacity="0.5"/></svg>');
     background-size: cover;
     background-position: center;
     color: white;
     margin: -40px -15px 0 -15px;
-    padding: 150px 20px 100px;
+    padding: 60px 20px 100px;
     position: relative;
     overflow: hidden;
 }
@@ -192,6 +206,69 @@ body {
     z-index: 1;
 }
 
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.hero-visual {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.hero-visual img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+}
+
+.hero-logo-area {
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.hero-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-logo img {
+    height: 180px;
+    width: 180px;
+    object-fit: contain;
+    background: white;
+    border-radius: 50%;
+    padding: 20px;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+    transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.hero-logo img:hover {
+    transform: rotate(15deg) scale(1.05);
+    filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.4));
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+}
+
 .hero-title {
     font-size: 56px;
     font-weight: 700;
@@ -205,8 +282,7 @@ body {
     font-size: 24px;
     color: rgba(255, 255, 255, 0.95);
     font-weight: 400;
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 100%;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -866,7 +942,30 @@ body {
     }
 
     .hero {
-        padding: 100px 20px 60px;
+        padding: 40px 20px 60px;
+    }
+
+    .hero-logo-area {
+        min-height: 180px;
+    }
+
+    .hero-logo img {
+        height: 140px;
+        width: 140px;
+        padding: 15px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .hero-visual {
+        max-width: 100%;
+    }
+
+    .logo img {
+        height: 40px;
     }
 
     .about-preview-content {
@@ -888,7 +987,9 @@ body {
     <!-- Navigation -->
     <nav class="menubar navbar navbar-expand-lg">
         <div class="container-fluid menubar-content">
-            <a class="navbar-brand logo" href="#">Minika Japan</a>
+            <a class="navbar-brand logo" href="#">
+                <img src="mineka_japan_logo.png" alt="Mineka Japan Logo" />
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -924,7 +1025,12 @@ body {
         <!-- Hero Section -->
         <section id="home" class="content-section active">
             <div class="hero">
-                <h1 class="hero-title" data-ja="Minika Japan: あなたの信頼できるパートナー" data-en="Minika Japan: Your Trusted Partner" data-zh="Minika Japan: 您的值得信赖的合作伙伴">Minika Japan: あなたの信頼できるパートナー</h1>
+                <div class="hero-logo-area">
+                    <div class="hero-logo">
+                        <img src="mineka_japan_logo.png" alt="株式会社ミネカ・ジャパン" />
+                    </div>
+                </div>
+                <h1 class="hero-title" data-ja="株式会社ミネカ・ジャパン: あなたの信頼できるパートナー" data-en="Minika Japan: Your Trusted Partner" data-zh="Minika Japan: 您的值得信赖的合作伙伴">株式会社ミネカ・ジャパン: あなたの信頼できるパートナー</h1>
                 <p class="hero-subtitle" data-ja="プロフェッショナルなサービスで、お客様のビジネスをサポートします。長年の経験と実績により、信頼性の高いサービスを提供しています。" data-en="Supporting your business with professional services. Years of experience and track record ensure reliable service delivery." data-zh="以专业服务支持您的业务。多年的经验和业绩确保可靠的服务交付。">プロフェッショナルなサービスで、お客様のビジネスをサポートします。長年の経験と実績により、信頼性の高いサービスを提供しています。</p>
             </div>
 
@@ -968,12 +1074,12 @@ body {
                     <div class="about-preview-content">
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="会社概要" data-en="Company Overview" data-zh="公司概况">会社概要</h2>
-                            <p class="about-preview-text">Minika Japanは、長年の経験と実績により、お客様から信頼をいただいている企業です。プロフェッショナルなチームによる確実なサービス提供、透明性の高い業務プロセス、お客様第一の姿勢で、質の高いサービスを提供しています。</p>
+                            <p class="about-preview-text">株式会社ミネカ・ジャパンは、長年の経験と実績により、お客様から信頼をいただいている企業です。プロフェッショナルなチームによる確実なサービス提供、透明性の高い業務プロセス、お客様第一の姿勢で、質の高いサービスを提供しています。</p>
                             <a href="#overview" class="about-preview-link" onclick="document.querySelector('[data-section=overview]').click(); return false;" data-ja="詳細を見る" data-en="Learn More" data-zh="了解更多">詳細を見る</a>
                         </div>
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="代表メッセージ" data-en="Message from CEO" data-zh="代表致辞">代表メッセージ</h2>
-                            <p class="about-preview-text">「お客様の信頼を第一に考え、常に最高のサービスを提供することをお約束いたします。Minika Japanは、お客様のビジネスパートナーとして、長期的な関係を築いていきたいと考えています。」</p>
+                            <p class="about-preview-text">「お客様の信頼を第一に考え、常に最高のサービスを提供することをお約束いたします。株式会社ミネカ・ジャパンは、お客様のビジネスパートナーとして、長期的な関係を築いていきたいと考えています。」</p>
                             <a href="#message" class="about-preview-link" onclick="document.querySelector('[data-section=message]').click(); return false;" data-ja="メッセージ全文を見る" data-en="Read Full Message" data-zh="阅读全文">メッセージ全文を見る</a>
                         </div>
                     </div>
@@ -1250,12 +1356,12 @@ body {
                 <h2 class="section-title" data-ja="会社概要" data-en="Company Overview" data-zh="公司概况">会社概要</h2>
                 
                 <div class="content-block" data-lang="ja">
-                    <p class="intro-text">Minika Japanは、お客様に信頼される企業として、質の高いサービスを提供しています。</p>
+                    <p class="intro-text">株式会社ミネカ・ジャパンは、お客様に信頼される企業として、質の高いサービスを提供しています。</p>
                     
                     <div class="company-info-block">
                         <div class="company-info-item">
                             <div class="company-info-label">会社名</div>
-                            <div class="company-info-value">Minika Japan（ミネカジャパン）</div>
+                            <div class="company-info-value">株式会社ミネカ・ジャパン<br>Minika Japan（ミネカジャパン）</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">登記番号</div>
@@ -1431,10 +1537,10 @@ body {
                             「お客様の信頼を第一に考え、常に最高のサービスを提供することをお約束いたします。」
                         </p>
                         <p class="intro-text">
-                            Minika Japanは、長年にわたり北海道地域において、お客様に信頼されるサービスを提供してまいりました。私たちは、単なる輸送サービスを提供するだけでなく、お客様のビジネスパートナーとして、お客様の成功を支援することを使命としています。
+                            株式会社ミネカ・ジャパンは、長年にわたり北海道地域において、お客様に信頼されるサービスを提供してまいりました。私たちは、単なる輸送サービスを提供するだけでなく、お客様のビジネスパートナーとして、お客様の成功を支援することを使命としています。
                         </p>
                         <p class="intro-text">
-                            プロフェッショナルなドライバー、安全で確実なサービス、透明性の高い料金設定、そしてお客様第一の姿勢。これらすべてが、Minika Japanがお客様から信頼をいただいている理由です。
+                            プロフェッショナルなドライバー、安全で確実なサービス、透明性の高い料金設定、そしてお客様第一の姿勢。これらすべてが、株式会社ミネカ・ジャパンがお客様から信頼をいただいている理由です。
                         </p>
                         <p class="intro-text">
                             今後も、お客様のニーズに応え、より良いサービスを提供していくことで、長期的なパートナーシップを築いていきたいと考えています。お客様のビジネスの成功が、私たちの成功でもあります。
@@ -1968,7 +2074,7 @@ body {
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p class="footer-text" data-ja="Minika Japan - 信頼できるパートナー" data-en="Minika Japan - Your Trusted Partner" data-zh="Minika Japan - 值得信赖的合作伙伴">Minika Japan - 信頼できるパートナー</p>
+            <p class="footer-text" data-ja="株式会社ミネカ・ジャパン - 信頼できるパートナー" data-en="Minika Japan - Your Trusted Partner" data-zh="Minika Japan - 值得信赖的合作伙伴">株式会社ミネカ・ジャパン - 信頼できるパートナー</p>
         </div>
     </footer>
 
