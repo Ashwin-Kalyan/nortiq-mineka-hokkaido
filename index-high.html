@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minika Japan - Your Trusted Partner</title>
+    <title>株式会社ミネカ・ジャパン | Minika Japan</title>
+    <link rel="icon" type="image/png" href="mineka_japan_logo.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Heroicons -->
@@ -180,14 +181,16 @@ body {
 /* Hero Section - Full Width Professional Banner */
 .hero {
     text-align: center;
-    background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f8f9fa" width="1200" height="600"/><path d="M0,300 Q300,200 600,300 T1200,300" stroke="%23e9ecef" stroke-width="2" fill="none" opacity="0.5"/></svg>');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.9));
     color: white;
     margin: -40px -15px 0 -15px;
     padding: 60px 20px 100px;
     position: relative;
     overflow: hidden;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .hero::before {
@@ -197,44 +200,55 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(44, 62, 80, 0.8), rgba(52, 73, 94, 0.7));
+    background-image: url('hero-image.jpg');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
     z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, 
+        rgba(30, 40, 50, 1) 0%,
+        rgba(30, 40, 50, 0.98) 20%,
+        rgba(35, 48, 60, 0.95) 35%,
+        rgba(40, 55, 70, 0.85) 45%,
+        rgba(44, 62, 80, 0.6) 55%,
+        rgba(44, 62, 80, 0.3) 65%,
+        rgba(44, 62, 80, 0.1) 75%,
+        transparent 85%,
+        transparent 100%);
+    z-index: 1;
 }
 
 .hero > * {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .hero-content {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
     flex-wrap: wrap;
+    width: 100%;
+    z-index: 2;
 }
 
 .hero-text {
     flex: 1;
     min-width: 300px;
+    max-width: 600px;
     text-align: left;
-}
-
-.hero-visual {
-    flex: 1;
-    min-width: 300px;
-    max-width: 500px;
-    text-align: center;
-}
-
-.hero-visual img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    object-fit: cover;
 }
 
 .hero-logo-area {
@@ -725,6 +739,7 @@ body {
     display: flex;
     padding: 12px 0;
     border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+    gap: 20px;
 }
 
 .company-info-item:last-child {
@@ -734,7 +749,7 @@ body {
 .company-info-label {
     font-weight: 600;
     color: var(--brand-blue);
-    min-width: 150px;
+    min-width: 220px;
     font-size: 15px;
 }
 
@@ -960,8 +975,14 @@ body {
         gap: 40px;
     }
 
-    .hero-visual {
+    .hero-text {
+        text-align: center;
         max-width: 100%;
+    }
+
+    .hero {
+        min-height: 500px;
+        padding: 40px 20px 80px;
     }
 
     .logo img {
@@ -988,7 +1009,7 @@ body {
     <nav class="menubar navbar navbar-expand-lg">
         <div class="container-fluid menubar-content">
             <a class="navbar-brand logo" href="#">
-                <img src="mineka_japan_logo.png" alt="Mineka Japan Logo" />
+                <img src="mineka_japan_logo.png" alt="株式会社ミネカ・ジャパン" data-ja-alt="株式会社ミネカ・ジャパン" data-en-alt="Minika Japan" data-zh-alt="Minika Japan" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -996,19 +1017,19 @@ body {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto menu-items">
                     <li class="nav-item">
-                        <a href="#home" class="nav-link menu-item active" data-section="home">ホーム</a>
+                        <a href="#home" class="nav-link menu-item active" data-section="home" data-ja="ホーム" data-en="Home" data-zh="首页">ホーム</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#overview" class="nav-link menu-item" data-section="overview">会社概要</a>
+                        <a href="#overview" class="nav-link menu-item" data-section="overview" data-ja="会社概要" data-en="Company Overview" data-zh="公司概况">会社概要</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#services" class="nav-link menu-item" data-section="services">サービス</a>
+                        <a href="#services" class="nav-link menu-item" data-section="services" data-ja="サービス" data-en="Services" data-zh="我们的服务">サービス</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#track-record" class="nav-link menu-item" data-section="track-record">実績</a>
+                        <a href="#track-record" class="nav-link menu-item" data-section="track-record" data-ja="実績" data-en="Track Record" data-zh="业绩">実績</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link menu-item" data-section="contact">お問い合わせ</a>
+                        <a href="#contact" class="nav-link menu-item" data-section="contact" data-ja="お問い合わせ" data-en="Contact Us" data-zh="联系我们">お問い合わせ</a>
                     </li>
                 </ul>
                 <div class="language-switcher">
@@ -1027,11 +1048,15 @@ body {
             <div class="hero">
                 <div class="hero-logo-area">
                     <div class="hero-logo">
-                        <img src="mineka_japan_logo.png" alt="株式会社ミネカ・ジャパン" />
+                        <img src="mineka_japan_logo.png" alt="株式会社ミネカ・ジャパン" data-ja-alt="株式会社ミネカ・ジャパン" data-en-alt="Minika Japan" data-zh-alt="Minika Japan" />
                     </div>
                 </div>
-                <h1 class="hero-title" data-ja="株式会社ミネカ・ジャパン: あなたの信頼できるパートナー" data-en="Minika Japan: Your Trusted Partner" data-zh="Minika Japan: 您的值得信赖的合作伙伴">株式会社ミネカ・ジャパン: あなたの信頼できるパートナー</h1>
-                <p class="hero-subtitle" data-ja="プロフェッショナルなサービスで、お客様のビジネスをサポートします。長年の経験と実績により、信頼性の高いサービスを提供しています。" data-en="Supporting your business with professional services. Years of experience and track record ensure reliable service delivery." data-zh="以专业服务支持您的业务。多年的经验和业绩确保可靠的服务交付。">プロフェッショナルなサービスで、お客様のビジネスをサポートします。長年の経験と実績により、信頼性の高いサービスを提供しています。</p>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title" data-ja="株式会社ミネカ・ジャパン: あなたの信頼できるパートナー" data-en="Minika Japan: Your Trusted Partner" data-zh="Minika Japan: 您的值得信赖的合作伙伴">株式会社ミネカ・ジャパン: あなたの信頼できるパートナー</h1>
+                        <p class="hero-subtitle" data-ja="プロフェッショナルなサービスで、お客様のビジネスをサポートします。長年の経験と実績により、信頼性の高いサービスを提供しています。" data-en="Supporting your business with professional services. Years of experience and track record ensure reliable service delivery." data-zh="以专业服务支持您的业务。多年的经验和业绩确保可靠的服务交付。">プロフェッショナルなサービスで、お客様のビジネスをサポートします。長年の経験と実績により、信頼性の高いサービスを提供しています。</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Trust Bar -->
@@ -1074,13 +1099,14 @@ body {
                     <div class="about-preview-content">
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="会社概要" data-en="Company Overview" data-zh="公司概况">会社概要</h2>
-                            <p class="about-preview-text">株式会社ミネカ・ジャパンは、長年の経験と実績により、お客様から信頼をいただいている企業です。プロフェッショナルなチームによる確実なサービス提供、透明性の高い業務プロセス、お客様第一の姿勢で、質の高いサービスを提供しています。</p>
-                            <a href="#overview" class="about-preview-link" onclick="document.querySelector('[data-section=overview]').click(); return false;" data-ja="詳細を見る" data-en="Learn More" data-zh="了解更多">詳細を見る</a>
+                            <p class="about-preview-text">株式会社ミネカ・ジャパンは、主に北海道を中心に、観光、モビリティ、手配サービスを中心とした事業を展開し、インバウンド観光客（訪日外国人）のニーズに対応しています。</p>
+                            <p class="about-preview-text">観光における「モビリティ」と「旅程管理」を重要な要素と捉えています。安全、信頼性、柔軟性をサービス提供の優先事項とし、国際貿易事業を通じて安定した事業基盤を構築しています。</p>
+                            <a href="#services" class="about-preview-link" onclick="document.querySelector('[data-section=services]').click(); return false;" data-ja="詳細を見る" data-en="Learn More" data-zh="了解更多">詳細を見る</a>
                         </div>
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="代表メッセージ" data-en="Message from CEO" data-zh="代表致辞">代表メッセージ</h2>
-                            <p class="about-preview-text">「お客様の信頼を第一に考え、常に最高のサービスを提供することをお約束いたします。株式会社ミネカ・ジャパンは、お客様のビジネスパートナーとして、長期的な関係を築いていきたいと考えています。」</p>
-                            <a href="#message" class="about-preview-link" onclick="document.querySelector('[data-section=message]').click(); return false;" data-ja="メッセージ全文を見る" data-en="Read Full Message" data-zh="阅读全文">メッセージ全文を見る</a>
+                            <p class="about-preview-text">ミネカ・ジャパンは「北の旅路」のコンシェルジュとして、お客様を北海道へとご案内いたします。</p>
+                            <p class="about-preview-text">レジャー、ビジネス、MICEなど、あらゆるシーンでお客様のニーズにお応えします。北海道への旅は、ミネカ・ジャパンにお任せください。</p>
                         </div>
                     </div>
                 </div>
@@ -1089,13 +1115,14 @@ body {
                     <div class="about-preview-content">
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="会社概要" data-en="Company Overview" data-zh="公司概况">Company Overview</h2>
-                            <p class="about-preview-text">Minika Japan is a trusted company with years of experience and track record. We provide high-quality services through reliable service delivery by our professional team, transparent business processes, and a customer-first approach.</p>
-                            <a href="#overview" class="about-preview-link" onclick="document.querySelector('[data-section=overview]').click(); return false;" data-ja="詳細を見る" data-en="Learn More" data-zh="了解更多">Learn More</a>
+                            <p class="about-preview-text">Minika Japan Corporation develops businesses centered on tourism, mobility, and arrangement services primarily in Hokkaido, catering to the demand from inbound tourists (visitors to Japan).</p>
+                            <p class="about-preview-text">We regard "mobility" and "itinerary management" in tourism as critical elements. We prioritize safety, reliability, and flexibility in our service provision while building a stable business foundation through international trade operations.</p>
+                            <a href="#services" class="about-preview-link" onclick="document.querySelector('[data-section=services]').click(); return false;" data-ja="詳細を見る" data-en="Learn More" data-zh="了解更多">Learn More</a>
                         </div>
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="代表メッセージ" data-en="Message from CEO" data-zh="代表致辞">Message from CEO</h2>
-                            <p class="about-preview-text">"We promise to always prioritize our clients' trust and deliver the highest quality service. Minika Japan aims to build long-term relationships as your trusted business partner."</p>
-                            <a href="#message" class="about-preview-link" onclick="document.querySelector('[data-section=message]').click(); return false;" data-ja="メッセージ全文を見る" data-en="Read Full Message" data-zh="阅读全文">Read Full Message</a>
+                            <p class="about-preview-text">Minika Japan is the concierge for "The North Journey," guiding our clients to Hokkaido.</p>
+                            <p class="about-preview-text">We respond to our clients' needs in all scenarios: leisure, business, MICE. Please entrust your travels to Hokkaido to Minika Japan.</p>
                         </div>
                     </div>
                 </div>
@@ -1104,13 +1131,14 @@ body {
                     <div class="about-preview-content">
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="会社概要" data-en="Company Overview" data-zh="公司概况">公司概况</h2>
-                            <p class="about-preview-text">Minika Japan是一家拥有多年经验和业绩的可信赖公司。我们通过专业团队提供可靠服务、透明的业务流程以及以客户为先的理念，提供高质量的服务。</p>
-                            <a href="#overview" class="about-preview-link" onclick="document.querySelector('[data-section=overview]').click(); return false;" data-ja="詳細を見る" data-en="Learn More" data-zh="了解更多">了解更多</a>
+                            <p class="about-preview-text">Minika Japan Corporation主要在北海道地区开展以旅游、出行和安排服务为中心的业务，满足入境游客（访日游客）的需求。</p>
+                            <p class="about-preview-text">我们将旅游中的"出行"和"行程管理"视为关键要素。我们在服务提供中优先考虑安全性、可靠性和灵活性，同时通过国际贸易业务建立稳定的业务基础。</p>
+                            <a href="#services" class="about-preview-link" onclick="document.querySelector('[data-section=services]').click(); return false;" data-ja="詳細を見る" data-en="Learn More" data-zh="了解更多">了解更多</a>
                         </div>
                         <div>
                             <h2 class="section-title" style="margin-bottom: 20px;" data-ja="代表メッセージ" data-en="Message from CEO" data-zh="代表致辞">代表致辞</h2>
-                            <p class="about-preview-text">"我们承诺始终将客户的信任放在首位，提供最高质量的服务。Minika Japan希望作为您值得信赖的业务合作伙伴，建立长期关系。"</p>
-                            <a href="#message" class="about-preview-link" onclick="document.querySelector('[data-section=message]').click(); return false;" data-ja="メッセージ全文を見る" data-en="Read Full Message" data-zh="阅读全文">阅读全文</a>
+                            <p class="about-preview-text">Minika Japan是"北方之旅"的礼宾服务，引导我们的客户前往北海道。</p>
+                            <p class="about-preview-text">我们在所有场景中响应客户的需求：休闲、商务、MICE。请将您的北海道之旅委托给Minika Japan。</p>
                         </div>
                     </div>
                 </div>
@@ -1118,118 +1146,55 @@ body {
 
             <!-- Section 4: Services Grid -->
             <div class="section-content" style="margin-top: 50px;">
-                <h2 class="section-title" data-ja="サービス" data-en="Our Services" data-zh="我们的服务">サービス</h2>
+                <h2 class="section-title" data-ja="事業内容" data-en="Business Activities" data-zh="业务活动">事業内容</h2>
                 
                 <div class="content-block" data-lang="ja">
-                    <p class="intro-text">お客様のニーズに合わせた多様なサービスを提供しています。各サービスの詳細については、お気軽にお問い合わせください。</p>
                     <div class="services-grid">
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                            </svg>
-                            <h3 class="service-card-title">ハイヤー・貸切サービス</h3>
-                            <p class="service-card-description">プロフェッショナルなドライバーによる安全で快適なハイヤー・貸切サービス。観光、ビジネス、各種イベントに対応します。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
+                            <h3 class="service-card-title">団体旅行事業（インバウンド支援）</h3>
+                            <p class="service-card-description">主にインバウンド外国人観光客グループ向けに、日本国内（北海道中心）での団体観光旅行の企画・手配・運営サービスを提供しています。海外の旅行会社や主催者との事前調整を行い、交通、宿泊、食事、観光行程、現地サポートなどを一括管理し、インバウンド団体旅行の円滑かつ安全な実施をサポートします。多言語対応や行程管理など、主催者と参加者の双方が安心できる運営体制を構築しています。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">空港送迎サービス</h3>
-                            <p class="service-card-description">新千歳空港をはじめ、主要空港への送迎サービス。時間に正確で、快適な移動を提供します。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
+                            <h3 class="service-card-title">観光ハイヤー事業</h3>
+                            <p class="service-card-description">北海道内の広大な観光・ビジネスニーズに対応するため、ハイヤー車両を用いたモビリティサービスを提供しています。インバウンド個人旅行者から企業、団体、インバウンドプロジェクトまで幅広いクライアントに対応し、行程や目的に応じた車両手配と運営管理を行っています。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="service-card-title">観光チャーターサービス</h3>
-                            <p class="service-card-description">富良野・美瑛、洞爺湖・登別、ニセコなど、北海道の主要観光地へのチャーターサービス。お客様のペースで観光を楽しめます。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
-                        </div>
-                        <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">ビジネス輸送サービス</h3>
-                            <p class="service-card-description">企業様向けのビジネス輸送サービス。会議、出張、各種ビジネスイベントに対応。プロフェッショナルなサービスでお客様のビジネスをサポートします。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
+                            <h3 class="service-card-title">貿易事業</h3>
+                            <p class="service-card-description">アパレルや日用品を中心とした輸出入・卸売事業を展開しています。海外の生産拠点との連携により、品質管理と安定した調達・供給体制を確立し、企業クライアント向けの継続的な取引を実現しています。</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block" data-lang="en" style="display: none;">
-                    <p class="intro-text">We offer a wide range of services tailored to meet our clients' needs. Please feel free to contact us for details on each service.</p>
                     <div class="services-grid">
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                            </svg>
-                            <h3 class="service-card-title">Private Hire Car Service</h3>
-                            <p class="service-card-description">Safe and comfortable private hire car service with professional drivers. Available for sightseeing, business, and various events.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
+                            <h3 class="service-card-title">Group Travel Business (Inbound Support)</h3>
+                            <p class="service-card-description">We primarily provide planning, arrangement, and operation services for group sightseeing tours within Japan (centered on Hokkaido) for inbound foreign tourist groups. We conduct prior coordination with overseas travel agencies and organizers, managing transportation, accommodation, meals, sightseeing itineraries, and local support in an integrated manner to support the smooth and safe execution of inbound group tours. We have established operational systems that provide peace of mind for both organizers and participants, including multilingual support and itinerary management.</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">Airport Transfer Service</h3>
-                            <p class="service-card-description">Transfer service to major airports including New Chitose Airport. Punctual and comfortable transportation.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
+                            <h3 class="service-card-title">Sightseeing Hire Car Business</h3>
+                            <p class="service-card-description">We provide mobility services using hire cars to accommodate the vast tourism and business needs within Hokkaido. We cater to a wide range of clients, from inbound individual travelers to corporations, groups, and inbound projects, arranging vehicles and managing operations according to itineraries and purposes.</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="service-card-title">Sightseeing Charter Service</h3>
-                            <p class="service-card-description">Charter service to major tourist destinations in Hokkaido such as Furano, Biei, Lake Toya, Noboribetsu, and Niseko. Enjoy sightseeing at your own pace.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
-                        </div>
-                        <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">Business Transportation Service</h3>
-                            <p class="service-card-description">Business transportation service for companies. Available for meetings, business trips, and various business events. We support your business with professional service.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
+                            <h3 class="service-card-title">Trade Business</h3>
+                            <p class="service-card-description">We engage in import/export and wholesale businesses, focusing on apparel and daily goods. Through collaboration with overseas production bases, we have established quality control and stable procurement/supply systems, enabling us to handle ongoing transactions for corporate clients.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block" data-lang="zh" style="display: none;">
-                    <p class="intro-text">我们提供多种服务，以满足客户的需求。如需了解各服务的详细信息，请随时联系我们。</p>
                     <div class="services-grid">
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                            </svg>
-                            <h3 class="service-card-title">包车服务</h3>
-                            <p class="service-card-description">专业司机提供的安全舒适的包车服务。适用于观光、商务和各种活动。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
+                            <h3 class="service-card-title">团体旅行业务（入境支援）</h3>
+                            <p class="service-card-description">我们主要为入境外国游客团体提供日本国内（以北海道为中心）的团体观光旅行的规划、安排和运营服务。我们与海外旅行社和主办方进行事前协调，统一管理交通、住宿、餐饮、观光行程和当地支持，以支持入境团体旅行的顺利和安全实施。我们建立了包括多语言支持和行程管理在内的运营体系，让主办方和参与者都能安心。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">机场接送服务</h3>
-                            <p class="service-card-description">前往新千岁机场等主要机场的接送服务。准时、舒适的交通服务。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
+                            <h3 class="service-card-title">观光包车业务</h3>
+                            <p class="service-card-description">我们提供使用包车的出行服务，以满足北海道内庞大的观光和商务需求。我们从入境个人旅行者到企业、团体和入境项目，为广泛的客户提供服务，根据行程和目的安排车辆并管理运营。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="service-card-title">观光包车服务</h3>
-                            <p class="service-card-description">前往富良野、美瑛、洞爷湖、登别、二世古等北海道主要旅游目的地的包车服务。您可以按照自己的节奏享受观光。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
-                        </div>
-                        <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">商务运输服务</h3>
-                            <p class="service-card-description">面向企业的商务运输服务。适用于会议、出差和各种商务活动。我们以专业服务支持您的业务。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
+                            <h3 class="service-card-title">贸易业务</h3>
+                            <p class="service-card-description">我们从事以服装和日用品为中心的进出口和批发业务。通过与海外生产基地的合作，我们建立了质量管理和稳定的采购供应体系，能够处理企业客户的持续交易。</p>
                         </div>
                     </div>
                 </div>
@@ -1360,28 +1325,36 @@ body {
                     
                     <div class="company-info-block">
                         <div class="company-info-item">
-                            <div class="company-info-label">会社名</div>
-                            <div class="company-info-value">株式会社ミネカ・ジャパン<br>Minika Japan（ミネカジャパン）</div>
+                            <div class="company-info-label">本社所在地</div>
+                            <div class="company-info-value">〒650-0012<br>兵庫県神戸市中央区北長狭通5-3-9<br>中村ビル202</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">登記番号</div>
-                            <div class="company-info-value">[登記番号を記載]</div>
+                            <div class="company-info-label">北海道支店</div>
+                            <div class="company-info-value">〒066-0064<br>北海道千歳市錦町4-7-1 12番地</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">設立年月日</div>
-                            <div class="company-info-value">[設立年月日を記載]</div>
+                            <div class="company-info-value">2014年4月8日（平成26年）</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">代表者</div>
-                            <div class="company-info-value">[代表者名を記載]</div>
-                        </div>
-                        <div class="company-info-item">
-                            <div class="company-info-label">本社所在地</div>
-                            <div class="company-info-value">[本社住所を記載]</div>
+                            <div class="company-info-label">資本金</div>
+                            <div class="company-info-value">35,000,000円</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">事業内容</div>
-                            <div class="company-info-value">ハイヤー・貸切サービス、観光チャーターサービス、空港送迎サービス、ビジネス輸送サービス</div>
+                            <div class="company-info-value">・インバウンド観光客向け国内旅行手配<br>・一般乗用旅客自動車運送事業（観光ハイヤー事業）<br>・子供服・子供用品の輸入販売</div>
+                        </div>
+                        <div class="company-info-item">
+                            <div class="company-info-label">代表取締役</div>
+                            <div class="company-info-value">孫 清華</div>
+                        </div>
+                        <div class="company-info-item">
+                            <div class="company-info-label">監査役</div>
+                            <div class="company-info-value">井田 義雄</div>
+                        </div>
+                        <div class="company-info-item">
+                            <div class="company-info-label">許可・登録</div>
+                            <div class="company-info-value">・旅行業登録：兵庫県知事登録旅行業 第2-802号<br>・一般乗用旅客自動車運送事業許可（北自旅第280号）</div>
                         </div>
                     </div>
                 </div>
@@ -1391,28 +1364,36 @@ body {
                     
                     <div class="company-info-block">
                         <div class="company-info-item">
-                            <div class="company-info-label">Company Name</div>
-                            <div class="company-info-value">Minika Japan</div>
+                            <div class="company-info-label">Head Office Address</div>
+                            <div class="company-info-value">〒650-0012<br>Nakamura Building 202, 5-3-9 Kitamagasadori, Chuo-ku, Kobe City, Hyogo Prefecture</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">Registration Number</div>
-                            <div class="company-info-value">[Registration Number]</div>
+                            <div class="company-info-label">Hokkaido Branch Office</div>
+                            <div class="company-info-value">〒066-0064<br>12-banchi, 4-7-1 Nishikimachi, Chitose City, Hokkaido</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">Founded</div>
-                            <div class="company-info-value">[Founded Date]</div>
+                            <div class="company-info-label">Date Established</div>
+                            <div class="company-info-value">April 8, 2014 (Heisei 26)</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">CEO / Representative</div>
-                            <div class="company-info-value">[CEO Name]</div>
+                            <div class="company-info-label">Capital</div>
+                            <div class="company-info-value">35,000,000 JPY</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">Headquarters Address</div>
-                            <div class="company-info-value">[Headquarters Address]</div>
+                            <div class="company-info-label">Business Activities</div>
+                            <div class="company-info-value">・Domestic travel arrangements for inbound tourists<br>・General Passenger Automobile Transport Business (Sightseeing Hire Car Business)<br>・Import and sale of children's clothing and children's goods</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">Business Scope</div>
-                            <div class="company-info-value">Private hire car service, sightseeing charter service, airport transfer service, business transportation service</div>
+                            <div class="company-info-label">Representative Director</div>
+                            <div class="company-info-value">Sun Qinghua</div>
+                        </div>
+                        <div class="company-info-item">
+                            <div class="company-info-label">Auditor</div>
+                            <div class="company-info-value">Yoshio Ida</div>
+                        </div>
+                        <div class="company-info-item">
+                            <div class="company-info-label">Licenses / Registrations</div>
+                            <div class="company-info-value">・Travel Agency Registration: Hyogo Prefectural Governor Registered Travel Agency No. 2-802<br>・General Passenger Automobile Transport Business Permit (Hokujiryoni No. 280)</div>
                         </div>
                     </div>
                 </div>
@@ -1422,28 +1403,36 @@ body {
                     
                     <div class="company-info-block">
                         <div class="company-info-item">
-                            <div class="company-info-label">公司名称</div>
-                            <div class="company-info-value">Minika Japan</div>
+                            <div class="company-info-label">总公司地址</div>
+                            <div class="company-info-value">〒650-0012<br>兵库县神户市中央区北长狭通5-3-9<br>中村大厦202</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">注册号</div>
-                            <div class="company-info-value">[注册号]</div>
+                            <div class="company-info-label">北海道分公司</div>
+                            <div class="company-info-value">〒066-0064<br>北海道千岁市锦町4-7-1 12番地</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">成立日期</div>
-                            <div class="company-info-value">[成立日期]</div>
+                            <div class="company-info-value">2014年4月8日（平成26年）</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">代表/CEO</div>
-                            <div class="company-info-value">[代表姓名]</div>
+                            <div class="company-info-label">资本金</div>
+                            <div class="company-info-value">35,000,000日元</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">总部地址</div>
-                            <div class="company-info-value">[总部地址]</div>
+                            <div class="company-info-label">业务活动</div>
+                            <div class="company-info-value">・面向入境游客的国内旅行安排<br>・一般乘用旅客汽车运输业务（观光包车业务）<br>・儿童服装及儿童用品的进口销售</div>
                         </div>
                         <div class="company-info-item">
-                            <div class="company-info-label">业务范围</div>
-                            <div class="company-info-value">包车服务、观光包车服务、机场接送服务、商务运输服务</div>
+                            <div class="company-info-label">代表董事</div>
+                            <div class="company-info-value">孙 清华</div>
+                        </div>
+                        <div class="company-info-item">
+                            <div class="company-info-label">审计员</div>
+                            <div class="company-info-value">井田 义雄</div>
+                        </div>
+                        <div class="company-info-item">
+                            <div class="company-info-label">许可/注册</div>
+                            <div class="company-info-value">・旅行社注册：兵库县知事注册旅行社 第2-802号<br>・一般乘用旅客汽车运输业务许可（北自旅第280号）</div>
                         </div>
                     </div>
                 </div>
@@ -1534,20 +1523,17 @@ body {
                 <div class="content-block" data-lang="ja">
                     <div style="max-width: 800px; margin: 0 auto;">
                         <p class="intro-text" style="font-size: 20px; margin-bottom: 30px; font-style: italic; color: var(--brand-blue);">
-                            「お客様の信頼を第一に考え、常に最高のサービスを提供することをお約束いたします。」
+                            「ミネカ・ジャパンは『北の旅路』のコンシェルジュとして、お客様を北海道へとご案内いたします。」
                         </p>
                         <p class="intro-text">
-                            株式会社ミネカ・ジャパンは、長年にわたり北海道地域において、お客様に信頼されるサービスを提供してまいりました。私たちは、単なる輸送サービスを提供するだけでなく、お客様のビジネスパートナーとして、お客様の成功を支援することを使命としています。
+                            ミネカ・ジャパンは「北の旅路」のコンシェルジュとして、お客様を北海道へとご案内いたします。
                         </p>
                         <p class="intro-text">
-                            プロフェッショナルなドライバー、安全で確実なサービス、透明性の高い料金設定、そしてお客様第一の姿勢。これらすべてが、株式会社ミネカ・ジャパンがお客様から信頼をいただいている理由です。
-                        </p>
-                        <p class="intro-text">
-                            今後も、お客様のニーズに応え、より良いサービスを提供していくことで、長期的なパートナーシップを築いていきたいと考えています。お客様のビジネスの成功が、私たちの成功でもあります。
+                            レジャー、ビジネス、MICEなど、あらゆるシーンでお客様のニーズにお応えします。北海道への旅は、ミネカ・ジャパンにお任せください。
                         </p>
                         <p class="intro-text" style="margin-top: 40px; text-align: right; font-weight: 600;">
-                            Minika Japan<br>
-                            代表取締役 [代表者名]
+                            株式会社ミネカ・ジャパン<br>
+                            代表取締役 孫 清華
                         </p>
                     </div>
                 </div>
@@ -1555,20 +1541,17 @@ body {
                 <div class="content-block" data-lang="en" style="display: none;">
                     <div style="max-width: 800px; margin: 0 auto;">
                         <p class="intro-text" style="font-size: 20px; margin-bottom: 30px; font-style: italic; color: var(--brand-blue);">
-                            "We promise to always prioritize our clients' trust and deliver the highest quality service."
+                            "Minika Japan is the concierge for 'The North Journey,' guiding our clients to Hokkaido."
                         </p>
                         <p class="intro-text">
-                            Minika Japan has been providing trusted services in the Hokkaido region for many years. We are committed not only to providing transportation services, but also to supporting our clients' success as their business partner.
+                            Minika Japan is the concierge for "The North Journey," guiding our clients to Hokkaido.
                         </p>
                         <p class="intro-text">
-                            Professional drivers, safe and reliable service, transparent pricing, and a customer-first approach. These are all reasons why Minika Japan has earned the trust of our clients.
-                        </p>
-                        <p class="intro-text">
-                            We will continue to meet our clients' needs and provide better services to build long-term partnerships. Our clients' success is our success.
+                            We respond to our clients' needs in all scenarios: leisure, business, MICE. Please entrust your travels to Hokkaido to Minika Japan.
                         </p>
                         <p class="intro-text" style="margin-top: 40px; text-align: right; font-weight: 600;">
-                            Minika Japan<br>
-                            CEO [CEO Name]
+                            Minika Japan Corporation<br>
+                            Representative Director Sun Qinghua
                         </p>
                     </div>
                 </div>
@@ -1576,20 +1559,17 @@ body {
                 <div class="content-block" data-lang="zh" style="display: none;">
                     <div style="max-width: 800px; margin: 0 auto;">
                         <p class="intro-text" style="font-size: 20px; margin-bottom: 30px; font-style: italic; color: var(--brand-blue);">
-                            "我们承诺始终将客户的信任放在首位，提供最高质量的服务。"
+                            "Minika Japan是'北方之旅'的礼宾服务，引导我们的客户前往北海道。"
                         </p>
                         <p class="intro-text">
-                            Minika Japan多年来一直在北海道地区提供值得信赖的服务。我们不仅致力于提供运输服务，还作为客户的业务合作伙伴，支持他们的成功。
+                            Minika Japan是"北方之旅"的礼宾服务，引导我们的客户前往北海道。
                         </p>
                         <p class="intro-text">
-                            专业司机、安全可靠的服务、透明的价格以及以客户为先的理念。这些都是Minika Japan赢得客户信任的原因。
-                        </p>
-                        <p class="intro-text">
-                            我们将继续满足客户的需求，提供更好的服务，建立长期合作伙伴关系。客户的成功就是我们的成功。
+                            我们在所有场景中响应客户的需求：休闲、商务、MICE。请将您的北海道之旅委托给Minika Japan。
                         </p>
                         <p class="intro-text" style="margin-top: 40px; text-align: right; font-weight: 600;">
-                            Minika Japan<br>
-                            代表 [代表姓名]
+                            株式会社ミネカ・ジャパン<br>
+                            代表董事 孙 清华
                         </p>
                     </div>
                 </div>
@@ -1599,118 +1579,55 @@ body {
         <!-- Services Section -->
         <section id="services" class="content-section">
             <div class="section-content">
-                <h2 class="section-title" data-ja="サービス" data-en="Our Services" data-zh="我们的服务">サービス</h2>
+                <h2 class="section-title" data-ja="事業内容" data-en="Business Activities" data-zh="业务活动">事業内容</h2>
                 
                 <div class="content-block" data-lang="ja">
-                    <p class="intro-text">お客様のニーズに合わせた多様なサービスを提供しています。各サービスの詳細については、お気軽にお問い合わせください。</p>
                     <div class="services-grid">
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                            </svg>
-                            <h3 class="service-card-title">ハイヤー・貸切サービス</h3>
-                            <p class="service-card-description">プロフェッショナルなドライバーによる安全で快適なハイヤー・貸切サービス。観光、ビジネス、各種イベントに対応します。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
+                            <h3 class="service-card-title">団体旅行事業（インバウンド支援）</h3>
+                            <p class="service-card-description">主にインバウンド外国人観光客グループ向けに、日本国内（北海道中心）での団体観光旅行の企画・手配・運営サービスを提供しています。海外の旅行会社や主催者との事前調整を行い、交通、宿泊、食事、観光行程、現地サポートなどを一括管理し、インバウンド団体旅行の円滑かつ安全な実施をサポートします。多言語対応や行程管理など、主催者と参加者の双方が安心できる運営体制を構築しています。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">空港送迎サービス</h3>
-                            <p class="service-card-description">新千歳空港をはじめ、主要空港への送迎サービス。時間に正確で、快適な移動を提供します。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
+                            <h3 class="service-card-title">観光ハイヤー事業</h3>
+                            <p class="service-card-description">北海道内の広大な観光・ビジネスニーズに対応するため、ハイヤー車両を用いたモビリティサービスを提供しています。インバウンド個人旅行者から企業、団体、インバウンドプロジェクトまで幅広いクライアントに対応し、行程や目的に応じた車両手配と運営管理を行っています。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="service-card-title">観光チャーターサービス</h3>
-                            <p class="service-card-description">富良野・美瑛、洞爺湖・登別、ニセコなど、北海道の主要観光地へのチャーターサービス。お客様のペースで観光を楽しめます。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
-                        </div>
-                        <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">ビジネス輸送サービス</h3>
-                            <p class="service-card-description">企業様向けのビジネス輸送サービス。会議、出張、各種ビジネスイベントに対応。プロフェッショナルなサービスでお客様のビジネスをサポートします。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">詳細・お問い合わせ</a>
+                            <h3 class="service-card-title">貿易事業</h3>
+                            <p class="service-card-description">アパレルや日用品を中心とした輸出入・卸売事業を展開しています。海外の生産拠点との連携により、品質管理と安定した調達・供給体制を確立し、企業クライアント向けの継続的な取引を実現しています。</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block" data-lang="en" style="display: none;">
-                    <p class="intro-text">We offer a wide range of services tailored to meet our clients' needs. Please feel free to contact us for details on each service.</p>
                     <div class="services-grid">
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                            </svg>
-                            <h3 class="service-card-title">Private Hire Car Service</h3>
-                            <p class="service-card-description">Safe and comfortable private hire car service with professional drivers. Available for sightseeing, business, and various events.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
+                            <h3 class="service-card-title">Group Travel Business (Inbound Support)</h3>
+                            <p class="service-card-description">We primarily provide planning, arrangement, and operation services for group sightseeing tours within Japan (centered on Hokkaido) for inbound foreign tourist groups. We conduct prior coordination with overseas travel agencies and organizers, managing transportation, accommodation, meals, sightseeing itineraries, and local support in an integrated manner to support the smooth and safe execution of inbound group tours. We have established operational systems that provide peace of mind for both organizers and participants, including multilingual support and itinerary management.</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">Airport Transfer Service</h3>
-                            <p class="service-card-description">Transfer service to major airports including New Chitose Airport. Punctual and comfortable transportation.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
+                            <h3 class="service-card-title">Sightseeing Hire Car Business</h3>
+                            <p class="service-card-description">We provide mobility services using hire cars to accommodate the vast tourism and business needs within Hokkaido. We cater to a wide range of clients, from inbound individual travelers to corporations, groups, and inbound projects, arranging vehicles and managing operations according to itineraries and purposes.</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="service-card-title">Sightseeing Charter Service</h3>
-                            <p class="service-card-description">Charter service to major tourist destinations in Hokkaido such as Furano, Biei, Lake Toya, Noboribetsu, and Niseko. Enjoy sightseeing at your own pace.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
-                        </div>
-                        <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">Business Transportation Service</h3>
-                            <p class="service-card-description">Business transportation service for companies. Available for meetings, business trips, and various business events. We support your business with professional service.</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">Details & Inquiry</a>
+                            <h3 class="service-card-title">Trade Business</h3>
+                            <p class="service-card-description">We engage in import/export and wholesale businesses, focusing on apparel and daily goods. Through collaboration with overseas production bases, we have established quality control and stable procurement/supply systems, enabling us to handle ongoing transactions for corporate clients.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="content-block" data-lang="zh" style="display: none;">
-                    <p class="intro-text">我们提供多种服务，以满足客户的需求。如需了解各服务的详细信息，请随时联系我们。</p>
                     <div class="services-grid">
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                            </svg>
-                            <h3 class="service-card-title">包车服务</h3>
-                            <p class="service-card-description">专业司机提供的安全舒适的包车服务。适用于观光、商务和各种活动。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
+                            <h3 class="service-card-title">团体旅行业务（入境支援）</h3>
+                            <p class="service-card-description">我们主要为入境外国游客团体提供日本国内（以北海道为中心）的团体观光旅行的规划、安排和运营服务。我们与海外旅行社和主办方进行事前协调，统一管理交通、住宿、餐饮、观光行程和当地支持，以支持入境团体旅行的顺利和安全实施。我们建立了包括多语言支持和行程管理在内的运营体系，让主办方和参与者都能安心。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">机场接送服务</h3>
-                            <p class="service-card-description">前往新千岁机场等主要机场的接送服务。准时、舒适的交通服务。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
+                            <h3 class="service-card-title">观光包车业务</h3>
+                            <p class="service-card-description">我们提供使用包车的出行服务，以满足北海道内庞大的观光和商务需求。我们从入境个人旅行者到企业、团体和入境项目，为广泛的客户提供服务，根据行程和目的安排车辆并管理运营。</p>
                         </div>
                         <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <h3 class="service-card-title">观光包车服务</h3>
-                            <p class="service-card-description">前往富良野、美瑛、洞爷湖、登别、二世古等北海道主要旅游目的地的包车服务。您可以按照自己的节奏享受观光。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
-                        </div>
-                        <div class="service-card">
-                            <svg class="service-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="service-card-title">商务运输服务</h3>
-                            <p class="service-card-description">面向企业的商务运输服务。适用于会议、出差和各种商务活动。我们以专业服务支持您的业务。</p>
-                            <a href="#contact" class="service-card-link" onclick="document.querySelector('[data-section=contact]').click(); return false;">详情与咨询</a>
+                            <h3 class="service-card-title">贸易业务</h3>
+                            <p class="service-card-description">我们从事以服装和日用品为中心的进出口和批发业务。通过与海外生产基地的合作，我们建立了质量管理和稳定的采购供应体系，能够处理企业客户的持续交易。</p>
                         </div>
                     </div>
                 </div>
@@ -2207,9 +2124,24 @@ function switchLanguage(lang) {
             // For input placeholders
             if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
                 element.placeholder = text;
-            } else {
+            } 
+            // For image alt attributes
+            else if (element.tagName === 'IMG' && element.hasAttribute(`data-${lang}-alt`)) {
+                element.alt = element.getAttribute(`data-${lang}-alt`);
+            }
+            // For all other elements
+            else {
                 element.textContent = text;
             }
+        }
+    });
+    
+    // Update logo alt text (navbar and hero)
+    const logoImgs = document.querySelectorAll('.logo img, .hero-logo img');
+    logoImgs.forEach(logoImg => {
+        const altText = logoImg.getAttribute(`data-${lang}-alt`);
+        if (altText) {
+            logoImg.alt = altText;
         }
     });
     
