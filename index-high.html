@@ -1004,7 +1004,7 @@ body {
 }
     </style>
 </head>
-<body>
+<body data-api-endpoint="https://mineka-backend.onrender.com/api/booking">
     <!-- Navigation -->
     <nav class="menubar navbar navbar-expand-lg">
         <div class="container-fluid menubar-content">
@@ -1326,11 +1326,11 @@ body {
                     <div class="company-info-block">
                         <div class="company-info-item">
                             <div class="company-info-label">本社所在地</div>
-                            <div class="company-info-value">〒650-0012<br>兵庫県神戸市中央区北長狭通5-3-9<br>中村ビル202</div>
+                            <div class="company-info-value">〒650-0012<br>兵庫県神戸市中央区北長狭通5-3-9<br>中村ビルディング 202号<br>TEL: 078-381-5699<br>FAX: 0501027-8978</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">北海道支店</div>
-                            <div class="company-info-value">〒066-0064<br>北海道千歳市錦町4-7-1 12番地</div>
+                            <div class="company-info-value">〒066-0064<br>北海道千歳市錦町4-7-1 12番地<br>TEL: 012-338-3740<br>FAX: 012-338-3740</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">設立年月日</div>
@@ -1338,7 +1338,7 @@ body {
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">資本金</div>
-                            <div class="company-info-value">35,000,000円</div>
+                            <div class="company-info-value">3,500万円</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">事業内容</div>
@@ -1346,11 +1346,11 @@ body {
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">代表取締役</div>
-                            <div class="company-info-value">孫 清華</div>
+                            <div class="company-info-value">孫 青華</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">監査役</div>
-                            <div class="company-info-value">井田 義雄</div>
+                            <div class="company-info-value">伊田 年男</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">許可・登録</div>
@@ -1365,11 +1365,11 @@ body {
                     <div class="company-info-block">
                         <div class="company-info-item">
                             <div class="company-info-label">Head Office Address</div>
-                            <div class="company-info-value">〒650-0012<br>Nakamura Building 202, 5-3-9 Kitamagasadori, Chuo-ku, Kobe City, Hyogo Prefecture</div>
+                            <div class="company-info-value">〒650-0012<br>Nakamura Building 202, 5-3-9 Kitamagasadori, Chuo-ku, Kobe City, Hyogo Prefecture<br>TEL: 078-381-5699<br>FAX: 0501027-8978</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">Hokkaido Branch Office</div>
-                            <div class="company-info-value">〒066-0064<br>12-banchi, 4-7-1 Nishikimachi, Chitose City, Hokkaido</div>
+                            <div class="company-info-value">〒066-0064<br>12-banchi, 4-7-1 Nishikimachi, Chitose City, Hokkaido<br>TEL: 012-338-3740<br>FAX: 012-338-3740</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">Date Established</div>
@@ -1404,11 +1404,11 @@ body {
                     <div class="company-info-block">
                         <div class="company-info-item">
                             <div class="company-info-label">总公司地址</div>
-                            <div class="company-info-value">〒650-0012<br>兵库县神户市中央区北长狭通5-3-9<br>中村大厦202</div>
+                            <div class="company-info-value">〒650-0012<br>兵库县神户市中央区北长狭通5-3-9<br>中村大厦202<br>TEL: 078-381-5699<br>FAX: 0501027-8978</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">北海道分公司</div>
-                            <div class="company-info-value">〒066-0064<br>北海道千岁市锦町4-7-1 12番地</div>
+                            <div class="company-info-value">〒066-0064<br>北海道千岁市锦町4-7-1 12番地<br>TEL: 012-338-3740<br>FAX: 012-338-3740</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">成立日期</div>
@@ -1533,7 +1533,7 @@ body {
                         </p>
                         <p class="intro-text" style="margin-top: 40px; text-align: right; font-weight: 600;">
                             株式会社ミネカ・ジャパン<br>
-                            代表取締役 孫 清華
+                            代表取締役 孫 青華
                         </p>
                     </div>
                 </div>
@@ -2191,7 +2191,8 @@ function initializeBookingForms() {
             submitBtn.textContent = currentLang === 'ja' ? '送信中...' : currentLang === 'zh' ? '提交中...' : 'Submitting...';
             
             try {
-                const response = await fetch('http://localhost:5000/api/booking', {
+                const apiEndpoint = document.body.getAttribute('data-api-endpoint') || 'https://mineka-backend.onrender.com/api/booking';
+                const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(bookingData)

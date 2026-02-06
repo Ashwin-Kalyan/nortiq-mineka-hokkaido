@@ -1442,7 +1442,7 @@ body::-webkit-scrollbar {
 }
     </style>
 </head>
-<body>
+<body data-api-endpoint="https://mineka-backend.onrender.com/api/booking">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg menubar fixed-top">
         <div class="container-fluid menubar-content">
@@ -1803,11 +1803,11 @@ body::-webkit-scrollbar {
                     <div class="company-info-block">
                         <div class="company-info-item">
                             <div class="company-info-label">Head Office Address</div>
-                            <div class="company-info-value">〒650-0012<br>Nakamura Ding Building 202, 5-3-9 Kita-Nagasa-dori, Chuo-ku, Kobe City, Hyogo Prefecture<br>TEL: 078-381-5699<br>FAX: 0501027-8978</div>
+                            <div class="company-info-value">〒650-0012<br>Nakamura Building 202, 5-3-9 Kitamagasadori, Chuo-ku, Kobe City, Hyogo Prefecture<br>TEL: 078-381-5699<br>FAX: 0501027-8978</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">Hokkaido Branch Office</div>
-                            <div class="company-info-value">〒066-0064<br>4-7-1-12 Nishiki-cho, Chitose City, Hokkaido<br>TEL: 012-338-3740<br>FAX: 012-338-3740</div>
+                            <div class="company-info-value">〒066-0064<br>12-banchi, 4-7-1 Nishikimachi, Chitose City, Hokkaido<br>TEL: 012-338-3740<br>FAX: 012-338-3740</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">Date Established</div>
@@ -1819,7 +1819,7 @@ body::-webkit-scrollbar {
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">Business Activities</div>
-                            <div class="company-info-value">・Domestic travel arrangements for inbound tourists<br>・General Passenger Automobile Transport Business (Tourist Taxi)<br>・Import and sale of children's clothing and children's goods</div>
+                            <div class="company-info-value">・Domestic travel arrangements for inbound tourists<br>・General Passenger Automobile Transport Business (Sightseeing Hire Car Business)<br>・Import and sale of children's clothing and children's goods</div>
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">Representative Director</div>
@@ -1831,7 +1831,7 @@ body::-webkit-scrollbar {
                         </div>
                         <div class="company-info-item">
                             <div class="company-info-label">Licenses / Registrations</div>
-                            <div class="company-info-value">・Travel Agency Registration: Hyogo Prefecture Governor Registered Travel Agency No. 2-802<br>・Full member of Japan Association of Travel Agents<br>・General Passenger Vehicle Transport Business License (Hokkaido License No. 280)</div>
+                            <div class="company-info-value">・Travel Agency Registration: Hyogo Prefectural Governor Registered Travel Agency No. 2-802<br>・General Passenger Automobile Transport Business Permit (Hokujiryoni No. 280)</div>
                         </div>
                     </div>
                 </div>
@@ -2740,7 +2740,7 @@ function initializeBookingForms() {
             submitBtn.textContent = currentLang === 'ja' ? '送信中...' : currentLang === 'zh' ? '提交中...' : 'Submitting...';
             
             // Get API endpoint from data attribute or use default
-            const apiEndpoint = document.body.getAttribute('data-api-endpoint') || 'http://localhost:5000/api/booking';
+            const apiEndpoint = document.body.getAttribute('data-api-endpoint') || 'https://mineka-backend.onrender.com/api/booking';
             
             try {
                 const response = await fetch(apiEndpoint, {
